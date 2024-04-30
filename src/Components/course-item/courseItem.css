@@ -1,0 +1,22 @@
+.card{
+    width: 50%;
+    background-color: aqua;
+}
+img{
+    width: 80%;
+    margin: auto; 
+    
+}
+h2{
+    font-size: 30px;
+    background-color: red;
+}
+p{
+   font-size: 15px; 
+}
+button{
+    float: left;
+    color: blue;
+    background-color: green;
+   
+}
