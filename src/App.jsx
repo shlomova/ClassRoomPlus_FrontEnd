@@ -3,7 +3,8 @@ import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
 import { getCourses } from './api-services/coursesServices'
-import InputUser from './Components/Input-user/InputUser'
+// import InputUser from './Components/Input-user/InputUser'
+import MainLogIn from './Components/log-in/mainLogIn'
 import CoursesList from './Components/courses-list/coursesList'
 
 function App() {
@@ -15,6 +16,7 @@ function App() {
     return (
         <div className='container'>
             <CoursesList courses={coursesArr} />
+        
         </div>
     )
 
