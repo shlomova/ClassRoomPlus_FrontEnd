@@ -28,7 +28,9 @@
     "users": [
         {
             "name": "Shimon",
-            "id":"3j99"
+            "id":"3j99",
+            "email":"333@gmail.com",
+            "password":111
         }
     ]
 }
