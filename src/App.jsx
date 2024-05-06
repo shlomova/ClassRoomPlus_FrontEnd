@@ -2,20 +2,20 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { getCourses } from './api-services/coursesServices'
-// import InputUser from './Components/Input-user/InputUser'
-import MainLogIn from './Components/log-in/mainLogIn'
 import CoursesList from './Components/courses-list/coursesList'
+// import InputUser from './Components/Input-user/InputUser'
+import axios from 'axios'
 
 function App() {
-    const [coursesArr, setCoursesArr] = useState([])
-
-    useEffect(() => {
-        getCourses().then(data => setCoursesArr(data))
-    }, [])
+    const [coursesArr, setCoursesArr] = useState('')
+    useEffect( async () =>{
+        const {data} = await axios.get('http://localhsot:3000/courses')
+        setCoursesArr(data)
+    },[])
     return (
         <div className='container'>
-            <CoursesList courses={coursesArr} />
+            <CoursesList course={coursesArr}/>
+            
         
         </div>
     )
