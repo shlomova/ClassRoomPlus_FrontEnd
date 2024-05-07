@@ -2,9 +2,9 @@ import React, { useEffect, useState } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import { createBrowserRouter, RouterProvider, Route, Link } from 'react-router-dom'
-import Dashboard from './pages/LogIn/Dashboard.jsx'
 import LogIn from './pages/LogIn/LogIn';
 import App from './App.jsx';
+import Dashboard from './pages/Dashboard/Dashboard.jsx';
 
 const router = createBrowserRouter([
     {
@@ -12,7 +12,13 @@ const router = createBrowserRouter([
         element: <LogIn />,
     },
     {
-        path: '/app',
+        path: 'dashboard',
+        element:<Dashboard/>
+       
+
+    },
+    {
+        path: '/App',
         element: <App />
     },
 ]);

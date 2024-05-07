@@ -1,0 +1,45 @@
+.maincontainer2{
+    background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPgVn-NbHyPEqcdh3lI4qpwVIhElKrE9RtRQ&usqp=CAU);
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: grid;
+    width: 100vw;
+    height: 100vh;
+}
+.dashboard-container {
+    width:  600px;
+    margin: auto;
+    padding: 20px;
+    text-align: center;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display:flex;
+    flex-direction: column;
+    margin-top: 100px;
+  
+  }
+  
+  .dashboard-title {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-button {
+    padding: 10px 20px;
+    margin: 5px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .dashboard-button:hover {
+    background-color: #0056b3;
+  }
+  
