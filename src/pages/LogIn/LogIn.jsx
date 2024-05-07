@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Login.css'
 
 const LogIn = () => {
   const navigate = useNavigate()
@@ -8,38 +9,42 @@ const LogIn = () => {
   const [password, setPassword] = useState('');
   const handleLogin = async (e) => {
     e.preventDefault()
-    const config = {
-      headers: {
-        'Access-Control-Allow-Origin': '*'
-      }
-    }
-    try {
-      const { data } = await axios.post(`http://localhost:3000/users/login`, { email, password }, config)
-      console.log(data);
-      if (data) {
-        localStorage.setItem('userInfo', JSON.stringify(data))
+    // const config = {
+    //   headers: {
+    //     'Access-Control-Allow-Origin': '*'
+    //   }
+    // }
+    // try {
+    //   const { data } = await axios.post(`http://localhost:3000/users/login`, { email, password }, config)
+    //   console.log(data);
+    //   if (data) {
+    //     localStorage.setItem('userInfo', JSON.stringify(data))
         navigate('/dashboard')
         return
-      }
-    } catch (error) {
-      alert('It is forbidden')
-    }
+      // }
+    // } catch (error) {
+    //   alert('It is forbidden')
+    // }
     // navigate('/')
   }
   return (
     <>
-      <h2>Login</h2>
+    <div className='maincontainer1'>
+    <div className="login-container">
+      <h2 className="login-title">Welcome to the our classrom</h2>
       <form onSubmit={handleLogin}>
-        <label>Email:</label>
-        <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-        <label>Password:</label>
-        <input type="password" value={password} onChange={(e) => setPassword(e.target.value)}
+        <label className="login-label">Email:</label>
+        <input className="login-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        <label className="login-label">Password:</label>
+        <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)}
         />
-        <button type="submit">Login</button>
+        <button className="login-button" type="submit">Login</button>
       </form>
-
+    </div>
+    </div>
     </>
   );
 }
+
 
 export default LogIn
