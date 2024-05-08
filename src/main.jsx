@@ -5,6 +5,7 @@ import { createBrowserRouter, RouterProvider, Route, Link } from 'react-router-d
 import LogIn from './pages/LogIn/LogIn';
 import App from './App.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
+import Subscribe from './pages/subscribe/subscribe.jsx';
 
 const router = createBrowserRouter([
     {
@@ -21,6 +22,11 @@ const router = createBrowserRouter([
         path: '/App',
         element: <App />
     },
+    {
+        path: 'subscribe',
+        element: <Subscribe />
+    }
+
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(
