@@ -2,6 +2,7 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import { useNavigate } from 'react-router-dom'
 // import CoursesList from './Components/courses-list/coursesList'
 // import InputUser from './Components/Input-user/InputUser'
 // import axios from 'axios'
@@ -12,8 +13,9 @@ function App() {
     //     const {data} = await axios.get('http://localhsot:3000/courses')
     //     setCoursesArr(data)
     // },[])
+    const naviget = useNavigate()
     const handleCourse = () => {
-        
+        naviget('/subscribe')
     }
     return (
         <div className='container'>
