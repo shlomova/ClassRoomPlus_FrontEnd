@@ -15,7 +15,7 @@ function App() {
     // },[])
     const naviget = useNavigate()
     const handleCourse = () => {
-        naviget('/subscribe')
+        naviget('/contentsClass')
     }
     return (
         <div className='container'>
