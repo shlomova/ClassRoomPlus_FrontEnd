@@ -1,0 +1,23 @@
+#theContainer2{
+    margin-top: 40px;
+    margin-right: 150px;
+    display: flex;
+    justify-content: end;
+}
+#theUl2{
+    display: flex;
+    justify-content: end; 
+    margin-right: 150px;
+    margin-top: 40px;
+}
+#people2{
+    color: blue;
+    border-bottom: solid black;
+    box-shadow: 2px 2px 3px tomato;
+}
+h1{
+   font-weight: bold;
+}
+h2{
+   font-weight: bold;
+}

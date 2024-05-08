@@ -1,0 +1,26 @@
+#Courses1{
+    color: blue;
+    border-bottom: solid black;
+    box-shadow: 2px 2px 3px tomato;
+}
+#theContainer1{
+
+    margin-top: 40px;
+    margin-right: 150px;
+    display: flex;
+    justify-content: end;
+}
+#theUl1{
+    margin-top: 50px;
+    margin-right: 190px;
+    display: flex;
+    justify-content: end;
+} 
+#theCourses1{
+
+    border-left: solid 0.1px rgba(0, 0, 0, 0.589);
+    float: right;
+    width: 10vw;
+    height: 100vh;
+}
+  
