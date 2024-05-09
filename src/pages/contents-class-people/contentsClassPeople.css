@@ -1,23 +1,36 @@
 #theContainer2{
     margin-top: 40px;
-    margin-right: 150px;
-    display: flex;
-    justify-content: end;
+    margin-left: 150px;
+    /* justify-content: end; */
 }
-#theUl2{
-    display: flex;
-    justify-content: end; 
-    margin-right: 150px;
-    margin-top: 40px;
+.theUl2{
+    margin-right: 190px;
+    margin-top: 50px;
+    margin-left: 20%;
 }
 #people2{
     color: blue;
     border-bottom: solid black;
     box-shadow: 2px 2px 3px tomato;
 }
-h1{
+#h1{
    font-weight: bold;
+   color: tomato;
+    border-bottom: solid rgba(172, 255, 47, 0.373)
+
+}
+h1{
+    font-size: 25px;
+    font-weight: bold;
+    border-bottom: solid 0.1px rgba(0, 0, 0, 0.589);
 }
 h2{
-   font-weight: bold;
+   font-weight: bold;  
+   font-size: 25px;
+
 }
+.EachLi{
+    border-bottom: solid 0.1px rgba(0, 0, 0, 0.589);
+    margin-top: 10px;
+}
+

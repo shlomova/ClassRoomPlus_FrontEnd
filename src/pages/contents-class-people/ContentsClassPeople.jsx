@@ -19,20 +19,20 @@ const ContentsClassPeople = () => {
   <div id='theCourses1'>
             <h1>Math</h1>
     </div> 
-    <div id = 'theUl2' className='d-flex'>
+    <div className='theUl2'>
     <ul>
-        <h1> Teachers </h1>
-        <li > Ziv Bacher</li>
-        <li > David Cohen</li>
-        <li>Banya Kehlani</li>
+        <h1 id='h1'> Teachers </h1>
+        <li className='EachLi'> Ziv Bacher</li>
+        <li className='EachLi'> David Cohen</li>
+        <li className='EachLi'>Banya Kehlani</li>
   </ul>
     </div>
-    <div id = 'theUl2' className='d-flex'>
+    <div className='theUl2'>
     <ul>
-        <h2> Students </h2>
-        <li > Yehuda Bruiner</li>
-        <li > Haim Shevdron</li>
-        <li>Maor Crispel</li>
+        <h2 id='h1'> Students </h2>
+        <li className='EachLi'> Yehuda Bruiner</li>
+        <li className='EachLi'> Haim Shevdron</li>
+        <li className='EachLi'>Maor Crispel</li>
   </ul>
     </div>
   </>
