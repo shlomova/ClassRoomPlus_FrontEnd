@@ -1,27 +1,25 @@
-// import React, { useEffect, useState } from 'react'
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import './Dashboard.css'
 
 const Dashboard = () => {
-    // const [name, setName] = useState('')
+    const [name, setName] = useState()
     const  navigate = useNavigate()
     const handleLogout = () =>{
-        // localStorage.removeItem('userInfo')
+        localStorage.removeItem('userInfo')
         navigate('/')
     }
-    // useEffect(() =>{
-    //     // if (!localStorage.getItem('userInfo')){
-    //     //     alert('Sorry, you do not have a registered system. Try again.')
-    //     //     navigate('/')
-    //     //     return
-    //     // }
-    //     // const {data, token} =JSON.parse(localStorage.getItem('userInfo'))
-    //     // if (!token){
-    //     //     navigate('/')
-    //     // }
-    //     setName(data.user.name)
-    // }, [])
+    useEffect(() =>{
+        if (!localStorage.getItem('userInfo')){
+            navigate('/')
+            return
+        }
+        const {data, token} =JSON.parse(localStorage.getItem('userInfo'))
+        if (!token){
+            navigate('/')
+        }
+        setName(`${data.user.firstName} ${data.user.lastName}`)
+    }, [])
     const handleToContinue = (e) =>{
         e.preventDefault();
         navigate('/App')

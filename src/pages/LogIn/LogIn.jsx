@@ -7,25 +7,34 @@ const LogIn = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [missing, setMissing] = useState('');
+  const [error, setError] = useState(null)
   const handleLogin = async (e) => {
     e.preventDefault()
-    // const config = {
-    //   headers: {
-    //     'Access-Control-Allow-Origin': '*'
-    //   }
-    // }
-    // try {
-    //   const { data } = await axios.post(`http://localhost:3000/users/login`, { email, password }, config)
-    //   console.log(data);
-    //   if (data) {
-    //     localStorage.setItem('userInfo', JSON.stringify(data))
+    const config = {
+      headers: {
+        'Access-Control-Allow-Origin': '*'
+      }
+    }
+    try {
+      const { data } = await axios.post(`http://localhost:3000/users/login`, { email, password }, {withCredentials:true})
+      console.log(data);
+      if (data) {
+        localStorage.setItem('userInfo', JSON.stringify(data))
         navigate('/dashboard')
         return
-      // }
-    // } catch (error) {
-    //   alert('It is forbidden')
-    // }
-    // navigate('/')
+      }
+    } catch (error) {
+      if (!email && !password){
+        setMissing('The email and password are missing')
+      }else{
+        if(!email || !password){
+        setMissing('The email or password is missing')
+        }
+      else
+      setError('You are not in the system. Do you want to singUp?') }
+    }
+    navigate('/')
   }
   return (
     <>
@@ -38,6 +47,12 @@ const LogIn = () => {
         <label className="login-label">Password:</label>
         <input className="login-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)}
         />
+        {error &&(
+          <p> {error} </p>
+        )}
+        {missing &&(
+          <p> {missing}</p>
+        )}
         <button className="login-button" type="submit">Login</button>
       </form>
     </div>
