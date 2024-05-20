@@ -5,13 +5,10 @@ import { useNavigate } from "react-router-dom"
 const CourseItem = ({openDate, endDate, id, courseName, description, price}) => {
   const navigate = useNavigate()
   const handleButton =() => {
-    if(courseName === 'math')
-    navigate('/contentsClass')
-    else
-    if(courseName === 'history')
-      navigate('/contentsClassHistory')
-
+    console.log("Navigating with state:", { openDate, endDate, id, courseName, description, price });
+    navigate('/contentsClass', { state: { openDate, endDate, id, courseName, description, price } })
   }
+ 
   return (
     <div className="card ">
         <p id="courseName">{courseName}</p>

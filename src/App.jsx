@@ -27,6 +27,7 @@ function App() {
     return (
         <>
         <div className='container'>
+            
             <CoursesList courses={coursesArr}/>
         </div>
         <button id='AppButton' onClick={handleButton}> To add a new course  </button>

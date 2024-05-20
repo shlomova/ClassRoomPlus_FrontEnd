@@ -7,6 +7,7 @@ const CoursesList = ({courses}) => {
         courses.map((course) => {
           return(
             <div className="col-md-4" key={course.id}>
+              
               <CourseItem
 
               openDate={course.openDate}
