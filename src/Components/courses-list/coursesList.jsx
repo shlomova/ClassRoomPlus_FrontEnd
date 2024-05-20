@@ -8,10 +8,14 @@ const CoursesList = ({courses}) => {
           return(
             <div className="col-md-4" key={course.id}>
               <CourseItem
-              img={course.img}
-              id={course.id}
-              courseTopic={course.courseTopic}
-              teacherName={course.teacherName}
+
+              openDate={course.openDate}
+              endDate={course.endDate}
+              // img={course.img}
+              id={course.userId}
+              courseName={course.courseName}
+              description={course.description}
+              price={course.price}
               />
             </div>
           )
