@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import './addCourse.css'
 import axios from 'axios';
 
-const CreateCourseForm = () => {
+const AddCourse = ({ onClose }) => {
     const [courseData, setCourseData] = useState({
         courseName: '',
         openDate: '',
@@ -24,14 +25,17 @@ const CreateCourseForm = () => {
         try {
             const response = await axios.post('http://localhost:3000/courses', courseData);
             console.log(response.data);
-            alert('Course created successfully');
+            onClose()
+            window.location.reload()
         } catch (error) {
             console.error('Error creating course:', error);
-            alert('Failed to create course');
         }
     };
 
     return (
+        <>
+        <div className="add-course-modal">
+            <button className="close-button" onClick={onClose}>X</button>
         <form onSubmit={handleSubmit}>
             <div>
                 <label>Course Name:</label>
@@ -59,7 +63,9 @@ const CreateCourseForm = () => {
             </div>
             <button type="submit">Create Course</button>
         </form>
+    </div>
+    </>
     );
 };
 
-export default CreateCourseForm;
+export default AddCourse;

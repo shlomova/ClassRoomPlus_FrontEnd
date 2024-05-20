@@ -2,12 +2,13 @@ import { useEffect, useState } from 'react'
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
-import { useNavigate } from 'react-router-dom'
 import CoursesList from './Components/courses-list/coursesList'
 import axios from 'axios'
+import AddCourse from './Components/course-item/add-course/addCourse'
+
 
 function App() {
-    const navigete = useNavigate()
+    const [addCourse, setAddCourse] = useState(false)
     const [coursesArr, setCoursesArr] = useState([])
     useEffect(() => {
         const fetchData = async () => {
@@ -22,8 +23,11 @@ function App() {
         fetchData();
     }, [])
     const handleButton = () => {
-        navigete('/addCourse')   
+        setAddCourse(!addCourse)
     }
+    const handleClose = () => {
+        setAddCourse(false);
+    };
     return (
         <>
         <div className='container'>
@@ -31,6 +35,9 @@ function App() {
             <CoursesList courses={coursesArr}/>
         </div>
         <button id='AppButton' onClick={handleButton}> To add a new course  </button>
+        {addCourse && (
+                <AddCourse onClose={handleClose} />
+            )}
         </>
     )
 
