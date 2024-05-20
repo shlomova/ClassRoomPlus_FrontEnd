@@ -33,4 +33,9 @@ h2{
     border-bottom: solid 0.1px rgba(0, 0, 0, 0.589);
     margin-top: 10px;
 }
-
+#theError{
+    font-weight: bold;
+    font-size: 20px;
+    margin-top: 50px;
+    text-align: center;
+}

@@ -26,12 +26,20 @@ const LogIn = () => {
       }
     } catch (error) {
       if (!email && !password){
+        setMissing('')
+        setError('')
         setMissing('The email and password are missing')
       }else{
         if(!email || !password){
+        setMissing('')
+        setError('')
+
         setMissing('The email or password is missing')
+        return
         }
       else
+      setMissing('')
+      setError('')
       setError('You are not in the system. Do you want to singUp?') }
     }
     navigate('/')

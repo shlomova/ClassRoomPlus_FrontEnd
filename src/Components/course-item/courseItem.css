@@ -1,20 +1,27 @@
 .card{
     width: 50%;
+    height: 100%;
     background-color: aqua;
 }
-img{
-    width: 80%;
-    margin: auto; 
-    
+#courseName{
+    width: 50%;
+    margin-right: 10%;
+    font-size: 20px;
+    color: blue; 
+    background-color: palevioletred;  
+    text-align: center; 
 }
-h2{
-    font-size: 30px;
+#opendate{
+    background-color: rgba(128, 128, 128, 0.389);
+    font-size: 15px;
+}
+#endDate{
     background-color: red;
 }
-p{
+.pCI{
    font-size: 15px; 
 }
-button{
+.button{
     float: left;
     color: blue;
     background-color: green;
