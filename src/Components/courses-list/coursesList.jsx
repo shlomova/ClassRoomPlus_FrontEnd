@@ -2,12 +2,12 @@ import CourseItem from "../course-item/courseItem"
 
 const CoursesList = ({courses}) => {
   return (
+
     <div className="row">
       {
         courses.map((course) => {
           return(
             <div className="col-md-4" key={course.id}>
-              
               <CourseItem
 
               openDate={course.openDate}
@@ -17,6 +17,7 @@ const CoursesList = ({courses}) => {
               courseName={course.courseName}
               description={course.description}
               price={course.price}
+              userId={course.userId}
               />
             </div>
           )

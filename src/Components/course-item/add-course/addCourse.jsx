@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './addCourse.css'
 import axios from 'axios';
 
-const AddCourse = ({ onClose }) => {
+const AddCourse = ({ onClose, userId}) => {
     const [courseData, setCourseData] = useState({
         courseName: '',
         openDate: '',
@@ -59,9 +59,9 @@ const AddCourse = ({ onClose }) => {
             </div>
             <div>
                 <label>User ID:</label>
-                <input type="text" name="userId" value={courseData.userId} onChange={handleChange} required />
+                <input id='userId' type="text" name="userId" value={userId} onChange={handleChange} required placeholder='Must be a user id that already exists' />
             </div>
-            <button type="submit">Create Course</button>
+            <button type="submit" id='CreateCourse'>Create Course</button>
         </form>
     </div>
     </>

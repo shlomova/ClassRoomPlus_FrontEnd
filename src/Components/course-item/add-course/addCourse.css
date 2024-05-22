@@ -57,7 +57,7 @@ input, textarea {
 }
 
 /* Style the submit button */
-button[type="submit"] {
+#CreateCourse{
     background-color: #4CAF50; /* Green background */
     color: white;
     padding: 10px 15px;
@@ -71,4 +71,7 @@ button[type="submit"] {
 
 button[type="submit"]:hover {
     background-color: #45a049;
+}
+#userId{
+    background-color: rgba(128, 128, 128, 0.351);
 }
