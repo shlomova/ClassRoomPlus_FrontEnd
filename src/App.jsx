@@ -5,11 +5,14 @@ import './App.css'
 import CoursesList from './Components/courses-list/coursesList'
 import axios from 'axios'
 import AddCourse from './Components/course-item/add-course/addCourse'
+import UtilsCheckUserAndToken from './utils/utilsCheckUserAndToken'
 
 
 function App() {
     const [addCourse, setAddCourse] = useState(false)
     const [coursesArr, setCoursesArr] = useState([])
+    const [userId, setUserId] = useState('')
+    const checkUserAndToken = UtilsCheckUserAndToken()
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -19,9 +22,14 @@ function App() {
                 console.error('Error fetching data:', error);
             }
         };
-
         fetchData();
     }, [])
+    useEffect(() =>{
+        const data = checkUserAndToken();
+        if (data) {
+            setUserId(`${data.user._id}`);
+        }
+    })
     const handleButton = () => {
         setAddCourse(!addCourse)
     }
@@ -35,8 +43,8 @@ function App() {
             <CoursesList courses={coursesArr}/>
         </div>
         <button id='AppButton' onClick={handleButton}> To add a new course  </button>
-        {addCourse && (
-                <AddCourse onClose={handleClose} />
+          {addCourse && (
+                <AddCourse onClose={handleClose} userId={userId} />
             )}
         </>
     )
