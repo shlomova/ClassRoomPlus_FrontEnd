@@ -1,8 +1,12 @@
 .card{
-    width: 50%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 55%;
     height: 100%;
     background-color: aqua;
 }
+
 #courseName{
     width: 50%;
     margin-right: 10%;
@@ -24,6 +28,7 @@
 .button{
     float: left;
     color: blue;
-    background-color: green;
+    background-color: rgba(0, 128, 0, 0.545);
+    border-radius: 8px 8px 8px;
    
 }

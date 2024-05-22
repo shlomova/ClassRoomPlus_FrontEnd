@@ -1,4 +1,4 @@
-.maincontainer1{
+ .maincontainer1{
     background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRyTr5UUErZk0OB75xvm9imKkYGrOHY-S-DwQ&usqp=CAU);
     background-size: cover;
     background-repeat: no-repeat;
@@ -6,7 +6,7 @@
     width: 100vw;
     height: 100vh;
 }
-.login-container {
+ .login-container {
     max-width: 400px;
     margin: 0 auto;
     padding: 20px;
@@ -21,7 +21,6 @@
     margin-top: 100px;
   }
   
-  /* Form Title */
   .login-title {
     color: green;
     background-color: yellow;
@@ -30,22 +29,19 @@
     font-size: 24px;
   }
   
-  /* Form Labels */
   .login-label {
     display: block;
     margin-bottom: 5px;
   }
   
-  /* Form Inputs */
   .login-input {
-    width: 100%;
+    width: 100%; 
     padding: 10px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
     border-radius: 3px;
   }
   
-  /* Submit Button */
   .login-button {
     width: 100%;
     padding: 10px;
@@ -61,4 +57,4 @@
   }
   form{
     width: 100%;
-  }
+  }  

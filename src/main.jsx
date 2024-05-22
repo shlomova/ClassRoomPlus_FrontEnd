@@ -14,9 +14,7 @@ const router = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element:<Dashboard/>
-       
-
+        element: <Dashboard />
     },
     {
         path: '/App',
@@ -28,7 +26,7 @@ const router = createBrowserRouter([
     // },
     {
         path: 'contentsClass',
-        element: <ContentsClass/>
+        element: <ContentsClass />
     }
 
 ]);
