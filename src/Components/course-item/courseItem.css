@@ -8,6 +8,7 @@
 }
 
 #courseName{
+    font-weight: 400;
     width: 50%;
     margin-right: 10%;
     font-size: 20px;
@@ -26,9 +27,13 @@
    font-size: 15px; 
 }
 .button{
+    font-weight: 400;
     float: left;
     color: blue;
     background-color: rgba(0, 128, 0, 0.545);
     border-radius: 8px 8px 8px;
    
+}
+#b{
+    font-weight: bold;
 }
