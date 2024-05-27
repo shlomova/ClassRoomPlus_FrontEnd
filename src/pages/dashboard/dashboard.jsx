@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
-import './Dashboard.css'
+import './dashboard.css'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken';
+import Header from "../../Components/header/Header.jsx";
 
-const Dashboard = () => {
+const dashboard = () => {
     const [name, setName] = useState()
     const navigate = useNavigate()
     const checkUserAndToken = UtilsCheckUserAndToken();
@@ -40,9 +41,8 @@ const Dashboard = () => {
                 </div>
             </div>
         </>
-
     );
 };
 
 
-export default Dashboard
+export default dashboard

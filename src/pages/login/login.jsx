@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Login.css'
+import './login.css'
 
-const LogIn = () => {
+const login = () => {
   const navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -70,4 +70,4 @@ const LogIn = () => {
 }
 
 
-export default LogIn
+export default login
