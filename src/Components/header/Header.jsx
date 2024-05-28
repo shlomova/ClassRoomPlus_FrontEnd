@@ -1,24 +1,20 @@
 import React from 'react';
-import './Header.css'; // Ensure you have the corresponding CSS file
 
 const Header = () => {
     return (
-        <header className="header">
-            <div className="logo">
-                <img src="logo.png" alt="Site Logo" className="logo-image" />
-                <h1 className="site-name">Site Name</h1>
+        <header className="d-flex flex-row justify-content-around align-items-center sticky-top bg-dark text-white fs-4">
+            <div className="me-auto d-flex flex-row ">
+                <img src="./../../img/logo.png" alt="Site Logo" className="logo-image" />
+                <h1 className="ms-5">Class Room +</h1>
             </div>
-            <nav className="nav">
-                <ul className="nav-list">
-                    <li className="nav-item"><a href="#home" className="nav-link">Home</a></li>
-                    <li className="nav-item"><a href="#about" className="nav-link">About</a></li>
-                    <li className="nav-item"><a href="#services" className="nav-link">Services</a></li>
-                    <li className="nav-item"><a href="#contact" className="nav-link">Contact</a></li>
+            <nav className=" nav">
+                <ul className="d-flex flex-row">
+                    <li className="nav-item"><a href="/" className="nav-link">Home</a></li>
+                    <li className="nav-item"><a href="/about" className="nav-link">About</a></li>
+                    <li className="nav-item"><a href="/courses" className="nav-link">Courses</a></li>
+                    <li id="Profile" className="nav-item"><a href="" className="nav-link">Profile</a></li>
                 </ul>
             </nav>
-            <div className="search">
-                <input type="text" placeholder="Search..." className="search-input" />
-            </div>
         </header>
     );
 };
