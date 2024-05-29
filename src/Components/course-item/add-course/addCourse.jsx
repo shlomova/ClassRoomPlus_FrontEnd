@@ -8,8 +8,8 @@ const AddCourse = ({ onClose, userId }) => {
         openDate: '',
         endDate: '',
         description: '',
-        price: '',
-        userId: ''
+         price: '',
+        userId: userId
     });
 
     const handleChange = (e) => {

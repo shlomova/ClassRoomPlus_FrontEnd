@@ -5,6 +5,7 @@ import { useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import ContentsClassPeople from '../../Components/contents-class-people/ContentsClassPeople'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
+import AddFile from '../../Components/addFile/AddFile'
 
 
 const ContentsClass = () => {
@@ -12,8 +13,9 @@ const ContentsClass = () => {
   const [courses, setCourses] = useState(true)
   const [people, setPeople] = useState(null)
   const [chats, setChats] = useState(null)
+  const [openPostFile, setOpenPostFile] = useState(null)
   const location = useLocation()
-  const { openDate, endDate, id, courseName, description, price } = location.state || {};
+  const { openDate, endDate, courseId, courseName, description, price } = location.state || {};
 
   useEffect(() => {
     checkUserAndToken()
@@ -34,16 +36,22 @@ const ContentsClass = () => {
     setCourses(false)
     setChats(false)
     setPeople(true)
+    setOpenPostFile(false)
   }
   const handleChats = () => {
     setCourses(false)
     setPeople(false)
     setChats(true)
+    setOpenPostFile(false)
   }
   const handleCourses = () => {
     setCourses(true)
     setPeople(false)
     setChats(false)
+    setOpenPostFile(false)
+  }
+  const handleButtonPostFile = () => {
+     setOpenPostFile(true)
   }
 
   return (
@@ -58,17 +66,18 @@ const ContentsClass = () => {
       <div id='theCourses1'>
         <h1>{courseName}</h1>
       </div>
-      {courses && (
+      {courses &&  !openPostFile &&(
         <>
           <div id='theUl1'>
             <ul id='ul'>
-              <li key={`${id}-name`} id='theLi'>
+              <li id='theLi'>
                 <h2>{courseName}</h2>
               </li>
-              <li key={`${id}-openDate`}>{openDate}</li>
-              <li key={`${id}-endDate`}>{endDate}</li>
-              <li key={`${id}-description`} ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
-              <li key={`${id}-price`}>{price}</li>
+              <li >{openDate}</li>
+              <li >{endDate}</li>
+              <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
+              <li >{price}</li>
+              <button id='PostFile' onClick={handleButtonPostFile}>get files or post file</button>
             </ul>
             {isOpen && (
               <div id="popup" style={{ top: position.top, left: position.left }}>
@@ -80,12 +89,17 @@ const ContentsClass = () => {
         </>
       )}
       {people && (
-        <ContentsClassPeople />
+        <ContentsClassPeople courseId={courseId} />
       )}
       {chats && (
         <div>
           <p id='חיים'> שלום לחיים שבדרון</p>
           <p id='חיים'> כאן זה התקפיד שלך למלא</p>
+        </div>
+      )}
+      {openPostFile && (
+        <div>
+        <AddFile courseId={courseId}/>
         </div>
       )}
     </>
