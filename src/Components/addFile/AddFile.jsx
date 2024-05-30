@@ -7,10 +7,12 @@ function AddFile({courseId}) {
   const [file, setFile] = useState()
   const [formDetails, setFormDetails] = useState({})
   const [image, setImage] = useState('')
+  
 
   const handleOnChange = e => {
     const { name, value } = e.target
     setFormDetails({ ...formDetails, [name]: value })
+    console.log(formDetails == 10);
   }
 
   const handleFile = e => {
@@ -37,14 +39,14 @@ function AddFile({courseId}) {
       <main id='theFile'>
         <h1>Upload an image</h1>
         <form className='form' onSubmit={handleSubmit}>
-          <input type="file" name="image" onChange={handleFile} />
+        <input type="file" name="file" accept=".jpg,.jpeg,.png,.doc,.docx,.pdf" onChange={handleFile} />
           <input type="text" name="username" placeholder={'Username'} onChange={handleOnChange} />
           <input type="text" name="email" placeholder={'Email'} onChange={handleOnChange} />
           <input className='submit' type="submit" value="Upload" />
         </form>
         {image &&
         <div>
-            הגיע לכאן
+          <a href={image} target='_blank'>link</a>
           <img src={image} alt="" />
           </div>
         }
