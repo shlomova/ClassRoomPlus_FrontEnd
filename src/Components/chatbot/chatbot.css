@@ -1,0 +1,50 @@
+/* Chatbot icon */
+.chatbot-icon {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #007bff;
+  color: #fff;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  z-index: 999;
+}
+
+/* Chatbot container */
+.chatbot-container {
+  position: fixed;
+  bottom: 90px;
+  right: 20px;
+  width: 300px;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  z-index: 998;
+}
+
+/* Bubble for chatbot message */
+.chatbot-bubble {
+  background-color: #007bff;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 10px;
+  clear: both;
+  float: right;
+}
+
+/* Bubble for user message */
+.user-bubble {
+  background-color: #ccc;
+  padding: 10px;
+  border-radius: 5px;
+  margin: 5px 10px;
+  clear: both;
+}
