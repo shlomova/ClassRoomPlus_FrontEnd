@@ -12,7 +12,8 @@ const Header = () => {
                     <li className="nav-item"><a href="/" className="nav-link">Home</a></li>
                     <li className="nav-item"><a href="/about" className="nav-link">About</a></li>
                     <li className="nav-item"><a href="/courses" className="nav-link">Courses</a></li>
-                    <li id="Profile" className="nav-item"><a href="" className="nav-link">Profile</a></li>
+                    {/* this is a link to ether login or singup */}
+                    <li id="Profile" className="nav-item"><a href="/login" className="nav-link">Profile</a></li>
                 </ul>
             </nav>
         </header>

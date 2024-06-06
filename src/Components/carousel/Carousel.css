@@ -1,0 +1,67 @@
+/* src/Components/carousel/Carousel.css */
+
+.carousel-container {
+  position: relative;
+  margin: 20px auto;
+  max-width: 800px; /* Adjust as needed */
+}
+
+.carousel {
+  display: flex;
+  overflow-x: hidden;
+}
+
+.carousel-buttons {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.carousel-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-size: 24px;
+  color: #333; /* Adjust color as needed */
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.carousel-button:first-child {
+  left: 10px;
+}
+
+.carousel-button:last-child {
+  right: 10px;
+}
+
+.carousel-button:hover {
+  color: #000; /* Adjust hover color as needed */
+}
+.carousel-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
+}
+
+.carousel-button {
+  background-color: #007bff; /* Button color */
+  color: white; /* Text color */
+  border: none;
+  border-radius: 50%; /* Rounded shape */
+  width: 40px; /* Button width */
+  height: 40px; /* Button height */
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.carousel-button:hover {
+  background-color: #0056b3; /* Darker color on hover */
+}

@@ -6,9 +6,15 @@ const Home = () => {
 
     return (
         <>
+        <>
             <HeroSection/>
+            </>
+            <>
             <CoursesSection/>
-            <TeachersSection/>
+            </>
+            <>
+            {/* <TeachersSection/> */}
+        </>
         </>
     )
 }

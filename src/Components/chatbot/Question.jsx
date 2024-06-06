@@ -4,6 +4,7 @@ import Option from './Option';
 const Question = ({ question, onOptionClick }) => {
     return (
       <div className="question-container">
+        
         <p className="question-text">{question.text}</p>
         <div className="options-container">
           {question.options.map(option => (

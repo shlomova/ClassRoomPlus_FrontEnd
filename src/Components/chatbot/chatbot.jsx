@@ -66,7 +66,8 @@ const Chatbot = () => {
       {/* Chatbot container */}
       {isOpen && (
         <div className="chatbot-container">
-          <h1>Chatbot</h1>
+          <h1>I'm chaty </h1>
+          <h2 className="question-title">{question.greeting}</h2>
           {loading ? (
             <div>Loading...</div>
           ) : url ? (
