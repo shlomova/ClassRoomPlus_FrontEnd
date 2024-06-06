@@ -6,6 +6,8 @@ import LogIn from './pages/LogIn/LogIn';
 import App from './App.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import ContentsClass from './pages/contents-class/contentsClass.jsx';
+import Home from './pages/home/Home.jsx';
+
 
 const router = createBrowserRouter([
     {
@@ -14,7 +16,7 @@ const router = createBrowserRouter([
     },
     {
         path: 'dashboard',
-        element: <Dashboard />
+        element: <Home />
     },
     {
         path: '/App',

@@ -1,0 +1,35 @@
+.hero-contaoner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: color-mix(in hsl shorter hue, color percentage, color percentage);
+  color: #fff;
+  text-align: center;
+}
+
+.hero-contaoner h1 {
+  font-size: 3rem;
+}
+
+.hero-contaoner p {
+  font-size: 1.5rem;
+}
+
+.hero-contaoner button {
+  padding: 10px 20px;
+  font-size: 1.2rem;
+  border: none;
+  background: #fff;
+  color: #333;
+  cursor: pointer;
+}   
+
+.search-hero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  color: #fff;
+  text-align: center;
+}
