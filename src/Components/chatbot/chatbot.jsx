@@ -71,7 +71,7 @@ const Chatbot = () => {
           {loading ? (
             <div>Loading...</div>
           ) : url ? (
-            <div>Redirecting to <a href={url}>{url}</a></div>
+            <div>Redirecting to <a href={url} >{url}</a></div>
           ) : question ? (
             <Question question={question} onOptionClick={handleOptionClick} />
           ) : (

@@ -7,7 +7,7 @@ import App from './App.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import ContentsClass from './pages/contents-class/contentsClass.jsx';
 import Home from './pages/home/Home.jsx';
-
+import Verifi from './pages/approve/Verifi.jsx';
 
 const router = createBrowserRouter([
     {
@@ -29,6 +29,10 @@ const router = createBrowserRouter([
     {
         path: 'contentsClass',
         element: <ContentsClass />
+    },
+    {
+        path: 'verifi',
+        element: <Verifi />
     }
 
 ]);
