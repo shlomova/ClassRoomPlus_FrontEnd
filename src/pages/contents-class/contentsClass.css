@@ -68,3 +68,19 @@ img{
   font-size: 40px;
   margin-left: 500px;
 }
+#PostFile {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    color: #fff;
+    background-color: #4CAF50;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#PostFile:hover {
+    background-color: #45a049;
+}

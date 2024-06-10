@@ -16,6 +16,7 @@ const CoursesList = ({ courses }) => {
                 description={course.description}
                 price={course.price}
                 userId={course.userId}
+                courseId={course._id}
               />
             </div>
       )}

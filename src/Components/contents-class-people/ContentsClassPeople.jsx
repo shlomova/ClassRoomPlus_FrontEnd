@@ -1,56 +1,52 @@
-import React, { useEffect, useState } from 'react'
-import './contentsClassPeople.css'
-import { useNavigate } from 'react-router-dom'
-import axios from 'axios'
+import React, { useEffect, useState } from 'react';
+import './contentsClassPeople.css';
+import axios from 'axios';
 
+const ContentsClassPeople = ({ courseId }) => {
+  const [error, setError] = useState(null);
+  const [subscribed, setSubscribed] = useState([]);
 
-const ContentsClassPeople = () => {
-  const [users, setUsers] = useState([])
-  const [error, setError] = useState(null)
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get('http://localhost:3000/users', { withCredentials: true });
-        setUsers(data.users);
+        const { data } = await axios.get(`http://localhost:3000/courses/${courseId}`, { withCredentials: true });
+
+        const theCourseSubscriptions = data.courses.subscription;
+
+        const filtered = theCourseSubscriptions.map(subscription => subscription.userId);
+        console.log('Filtered User IDs:', filtered);
+
+        setSubscribed(filtered);
       } catch (error) {
-        console.error('Error fetching data:', error);
-        setError('there is an error')
+        setError('There is an error');
       }
     };
 
     fetchData();
-  }, [])
-  const navigate = useNavigate()
-  const handleCourses = () => {
-    navigate('/contentsClass')
-  }
+  }, [courseId]);
 
   return (
-    <>
-      {/* <div id='theContainer2'>
-        <button onClick={handleCourses} className='mx-3' id='Courses2'> Courses</button>
-        <button className='mx-3' id='Chats2'> Chats</button>
-        <button className='mx-3' id='people2'> people</button>
-      </div>
-      <div id='theCourses1'>
-        <h1>Math</h1>
-      </div> */}
-      {error ? (
-        <div id='theError'>Sorry, but access is only granted to those with admin permission</div>
-      ) : (
-        <div>
-          <h2>Users List</h2>
-          <ul>
-            {users.map(user => (
-              <li key={user._id}>{user.firstName} {user.lastName}</li>
-            ))}
-          </ul>
-        </div>
-      )}
+    <div>
+      <h2>Users List</h2>
+      {error && <p>{error}</p>}
+      <ul>
+        {subscribed.length > 0 ? (
+          subscribed.map((user, index) => (
+            <li key={index}>
+                {user ? `${user.firstName} ${user.lastName}` : 'No ID available'}
+            </li>
+          ))
+        ) : (
+          <p>No users subscribed.</p>
+        )}
+      </ul>
+    </div>
+  );
+};
 
-    </>
-  )
-}
+export default ContentsClassPeople;
 
 
-export default ContentsClassPeople 
+
+
+

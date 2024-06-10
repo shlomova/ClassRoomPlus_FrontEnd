@@ -1,10 +1,13 @@
 import React, { useEffect } from 'react'
 import './contentsClass.css'
+import axios from 'axios'
 import { useState } from 'react'
 import { useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import ContentsClassPeople from '../../Components/contents-class-people/ContentsClassPeople'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
+import AddFile from '../../Components/addFile/AddFile'
+import GetFiles from '../../Components/getFiles/getFiles'
 
 
 const ContentsClass = () => {
@@ -12,12 +15,29 @@ const ContentsClass = () => {
   const [courses, setCourses] = useState(true)
   const [people, setPeople] = useState(null)
   const [chats, setChats] = useState(null)
+  const [openPostFile, setOpenPostFile] = useState(null)
   const location = useLocation()
-  const { openDate, endDate, id, courseName, description, price } = location.state || {};
+  const { openDate, endDate, courseId, courseName, description, price } = location.state || {};
 
   useEffect(() => {
     checkUserAndToken()
   }, [])
+  const [images, setImages] = useState([]);
+  useEffect(() => {
+    const fetchFiles = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
+        console.log(res);
+        const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000${item.file}` }))
+        console.log(files);
+        setImages(files);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchFiles();
+  }, [courseId]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({});
@@ -31,20 +51,33 @@ const ContentsClass = () => {
     setIsOpen(!isOpen);
   };
   const handlePeople = () => {
+    setPeople(true)
     setCourses(false)
     setChats(false)
-    setPeople(true)
+    setOpenPostFile(false)
+
   }
   const handleChats = () => {
+    setChats(true)
     setCourses(false)
     setPeople(false)
-    setChats(true)
+    setOpenPostFile(false)
+
+
+
   }
   const handleCourses = () => {
     setCourses(true)
     setPeople(false)
     setChats(false)
+    setOpenPostFile(false)
+
+
   }
+  const handleButtonPostFile = () => {
+     setOpenPostFile(true)
+  }
+ 
 
   return (
     <>
@@ -58,17 +91,18 @@ const ContentsClass = () => {
       <div id='theCourses1'>
         <h1>{courseName}</h1>
       </div>
-      {courses && (
+      {courses &&  !openPostFile &&(
         <>
           <div id='theUl1'>
             <ul id='ul'>
-              <li key={`${id}-name`} id='theLi'>
+              <li id='theLi'>
                 <h2>{courseName}</h2>
               </li>
-              <li key={`${id}-openDate`}>{openDate}</li>
-              <li key={`${id}-endDate`}>{endDate}</li>
-              <li key={`${id}-description`} ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
-              <li key={`${id}-price`}>{price}</li>
+              <li >{openDate}</li>
+              <li >{endDate}</li>
+              <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
+              <li >{price}</li>
+              <button id='PostFile' onClick={handleButtonPostFile}> post file</button>
             </ul>
             {isOpen && (
               <div id="popup" style={{ top: position.top, left: position.left }}>
@@ -77,10 +111,12 @@ const ContentsClass = () => {
               </div>
             )}
           </div>
+        <GetFiles images={images} />
+
         </>
       )}
       {people && (
-        <ContentsClassPeople />
+        <ContentsClassPeople courseId={courseId} />
       )}
       {chats && (
         <div>
@@ -88,6 +124,12 @@ const ContentsClass = () => {
           <p id='חיים'> כאן זה התקפיד שלך למלא</p>
         </div>
       )}
+      {openPostFile && (
+        <div>
+        <AddFile courseId={courseId}/>
+        </div>
+      )}
+    
     </>
   );
 };

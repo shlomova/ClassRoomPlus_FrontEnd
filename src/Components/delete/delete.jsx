@@ -5,12 +5,21 @@ import axios from 'axios';
 const Delete = ({ categories }) => {
     const [selectedCategoryId, setSelectedCategoryId] = useState("All");
     const [showConfirm, setShowConfirm] = useState(false);
+    const [showErrror, setShowError] = useState(false);
 
-    const handleSelect = (event) => {
+
+    const handleSelect = async (event) => {
         const { value } = event.target;
         setSelectedCategoryId(value);
+        const theValue = value
         if (value !== "All") {
-            setShowConfirm(true);
+            try{
+                console.log(theValue);
+                await axios.delete(`http://localhost:3000/courses/${theValue}`, {withCredentials: true})
+                setShowConfirm(true);
+            }catch(error){
+                setShowError(true)
+            }
             
         }
     };
@@ -31,6 +40,10 @@ const Delete = ({ categories }) => {
         setShowConfirm(false);
         setSelectedCategoryId("All");
     };
+    const handleBotton = () =>{
+        setShowError(false)
+        setSelectedCategoryId("All")   
+    }
 
     return (
             <div>
@@ -43,7 +56,14 @@ const Delete = ({ categories }) => {
                         </option>
                     ))}
                 </select>
-
+            {/* {showErrror && (
+                <div className="confirm-modal">
+                    <p>Sorry but you do not have permission</p>
+                    <div className="buttons">
+                        <button className="confirm" onClick={handleBotton}>ok</button>
+                    </div>
+                </div>
+            )} */}
             {showConfirm && (
                 <div className="confirm-modal">
                     <p>Are you sure you want to delete this course?</p>

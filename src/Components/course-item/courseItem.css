@@ -27,6 +27,7 @@
    font-size: 15px; 
 }
 .button{
+    margin-left: 0px;
     font-weight: 400;
     float: left;
     color: blue;
@@ -36,4 +37,15 @@
 }
 #b{
     font-weight: bold;
+}
+.button2{
+    background-color: rgba(0, 0, 0, 0.538);
+    width: 120px;
+    height: 40px;
+}
+.button3{
+    margin-top: 5px;
+    background-color: rgba(0, 0, 0, 0.538);
+    width: 120px;
+    height: 60px;
 }
