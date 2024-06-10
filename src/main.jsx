@@ -6,6 +6,9 @@ import LogIn from './pages/LogIn/LogIn';
 import App from './App.jsx';
 import Dashboard from './pages/Dashboard/Dashboard.jsx';
 import ContentsClass from './pages/contents-class/contentsClass.jsx';
+import Home from './pages/home/Home.jsx';
+import Verifi from './pages/approve/Verifi.jsx';
+import Signup from './pages/signup/Signup.jsx'
 
 const router = createBrowserRouter([
     {
@@ -13,8 +16,12 @@ const router = createBrowserRouter([
         element: <LogIn />,
     },
     {
+        path: 'signup',
+        element: <Signup />
+    },
+    {
         path: 'dashboard',
-        element: <Dashboard />
+        element: <Home />
     },
     {
         path: '/App',
@@ -27,6 +34,10 @@ const router = createBrowserRouter([
     {
         path: 'contentsClass',
         element: <ContentsClass />
+    },
+    {
+        path: 'verifi',
+        element: <Verifi />
     }
 
 ]);
