@@ -25,11 +25,22 @@ const Verifi = () => {
     }, [userId]); // Trigger effect when userId changes
 
     return (
-        <div>
-            <h1>Verification Page</h1>
-            <button className="btn btn-primary" onClick={() => navigate('/App')}>
-                Back to Home
-            </button>
+        <div className="container mt-5">
+            <div className="row justify-content-center">
+                <div className="col-md-6 text-center">
+                    <div className="card shadow-sm">
+                        <div className="card-body">
+                            <h1 className="card-title mb-4">Verification Page</h1>
+                            <p className="card-text mb-4">
+                                Please verify your account to proceed. Check your email for the verification link.
+                            </p>
+                            <button className="btn btn-primary" onClick={() => navigate('/App')}>
+                                Back to Home
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }

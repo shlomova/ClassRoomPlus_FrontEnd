@@ -21,7 +21,7 @@
   bottom: 90px;
   right: 20px;
   width: 300px;
-  max-height:400px;
+  max-height: 400px;
   overflow-y: auto;
   background-color: #fff;
   border: 1px solid #ccc;
@@ -29,7 +29,7 @@
   z-index: 1100;
 }
 
-Bubble for chatbot message */
+/* Bubble for chatbot message */
 .chatbot-bubble {
   background-color: #007bff;
   color: #fff;
@@ -51,4 +51,31 @@ Bubble for chatbot message */
   float: left;
 }
 
+/* Additional styling for the question and options */
+.question-container {
+  margin-bottom: 10px;
+}
 
+.question-text {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.options-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.option-button {
+  padding: 10px;
+  margin: 5px 0;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.option-button:hover {
+  background-color: #0056b3;
+}
