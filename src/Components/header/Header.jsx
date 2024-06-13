@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 const Header = ({ showLinks, showPartLinks }) => {
     const handleLogout = () => {
         localStorage.removeItem('userInfo');
-        window.location.href = '/login';
+        window.location.href = '/';
     };
 
     return (
@@ -28,11 +28,11 @@ const Header = ({ showLinks, showPartLinks }) => {
                         </li>
                         <li className="nav-item dropdown">
                             <select className="nav-link bg-dark text-white px-3" id="navbarDropdown" onChange={(e) => window.location.href = e.target.value}>
-                                <option value="#" selected disabled>Account</option>
+                                <option value="" selected disabled>Account</option>
                                 <option value="/profile">View Profile</option>
                                 <option value="/edit-profile">Edit Profile</option>
                                 <option value="/change-password">Change Password</option>
-                                <option value="#" onClick={handleLogout}>Logout</option>
+                                <option value="/" onClick={handleLogout}>Logout</option>
                             </select>
                         </li>
                     </ul>
