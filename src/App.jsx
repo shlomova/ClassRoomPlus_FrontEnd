@@ -6,6 +6,8 @@ import axios from 'axios'
 import AddCourse from './Components/course-item/add-course/addCourse'
 import UtilsCheckUserAndToken from './utils/utilsCheckUserAndToken'
 import Subjects from './Components/subjects/subjects'
+import Header from './Components/header/Header'
+import { Link } from 'react-router-dom'
 
 
 function App() {
@@ -40,9 +42,14 @@ function App() {
     const handleClose = () => {
         setAddCourse(false);
     };
+    const handleLogout = () => {
+        localStorage.removeItem('userInfo');
+        window.location.href = '/login';
+    };
 
     return (
         <>
+        <Header showLinks={false} showPartLinks={true}/>
             <div htmlFor=""> 
                 <Subjects
                     courses={coursesArr}

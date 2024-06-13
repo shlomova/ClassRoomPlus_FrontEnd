@@ -8,6 +8,7 @@ import ContentsClassPeople from '../../Components/contents-class-people/Contents
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
 import AddFile from '../../Components/addFile/AddFile'
 import GetFiles from '../../Components/getFiles/getFiles'
+import Header from '../../Components/header/Header'
 
 
 const ContentsClass = () => {
@@ -81,7 +82,7 @@ const ContentsClass = () => {
 
   return (
     <>
-
+    <Header showLinks={false} showPartLinks={true}/>
       <div id='theContainer1'>
 
         <button onClick={handleCourses} className='mx-3' id={courses ? 'Courses1' : 'none'}> Courses</button>

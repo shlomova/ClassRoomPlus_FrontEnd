@@ -25,7 +25,7 @@ const Login = () => {
       console.log(data);
       if (data) {
         localStorage.setItem('userInfo', JSON.stringify(data));
-        navigate('/dashboard');
+        navigate('/dashboashrd');
         return;
       }
     } catch (error) {
@@ -48,6 +48,10 @@ const Login = () => {
     }
     navigate('/');
   };
+    const handleLogout = () => {
+        localStorage.removeItem('userInfo');
+        window.location.href = '/login';
+    };
 
   return (
     <>
