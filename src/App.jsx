@@ -6,7 +6,7 @@ import UtilsCheckUserAndToken from './utils/utilsCheckUserAndToken';
 import Subjects from './Components/subjects/subjects';
 import Chatbot from './Components/chatbot/chatbot';
 import CourseItem from './Components/course-item/courseItem';
-import Subscription from './Components/subscription/Subscription'; // Import the Subscription component
+import Subscription from './Components/subscribe/subscribe';
 
 function App() {
   const [addCourse, setAddCourse] = useState(false);
