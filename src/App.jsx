@@ -16,6 +16,9 @@ function App() {
     const [categories, setCategories] = useState([])
     const [userId, setUserId] = useState('')
     const checkUserAndToken = UtilsCheckUserAndToken()
+    useEffect(() => {
+       checkUserAndToken()
+    }, [])
 
     useEffect(() => {
         const fetchData = async () => {
