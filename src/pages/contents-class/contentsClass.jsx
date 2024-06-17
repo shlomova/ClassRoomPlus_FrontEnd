@@ -6,8 +6,12 @@ import { useRef } from 'react'
 import { useLocation } from 'react-router-dom'
 import ContentsClassPeople from '../../Components/contents-class-people/ContentsClassPeople'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
+import Chatroom from '../../Components/chatroom/chatroom.jsx'
 import AddFile from '../../Components/addFile/AddFile'
 import GetFiles from '../../Components/getFiles/getFiles'
+import Chatbot from '../../Components/chatbot/chatbot'
+
+
 
 
 const ContentsClass = () => {
@@ -81,17 +85,19 @@ const ContentsClass = () => {
 
   }
   const handleButtonPostFile = () => {
-     setOpenPostFile(true)
+    setOpenPostFile(true)
   }
   const handleButtonGetFiles = () => {
-     setOpenGetFiles(true)
+    setOpenGetFiles(true)
   }
 
 
   return (
     <>
-
+      <Chatbot />
       <div id='theContainer1'>
+
+
 
         <button onClick={handleCourses} className='mx-3' id={courses ? 'Courses1' : 'none'}> Courses</button>
         <button onClick={handleChats} className='mx-3' id={chats ? 'Courses1' : 'chats'}>Chats</button>
@@ -100,7 +106,7 @@ const ContentsClass = () => {
       <div id='theCourses1'>
         <h1>{courseName}</h1>
       </div>
-      {courses &&  !openPostFile &&(
+      {courses && !openPostFile && (
         <>
           <div id='theUl1'>
             <ul id='ul'>
@@ -128,19 +134,19 @@ const ContentsClass = () => {
       )}
       {chats && (
         <div>
-          <p id='חיים'> שלום לחיים שבדרון</p>
-          <p id='חיים'> כאן זה התקפיד שלך למלא</p>
+          <Chatroom courseId={courseId} />
         </div>
       )}
       {openPostFile && (
         <div>
-        <AddFile courseId={courseId}/>
+          <AddFile courseId={courseId} />
         </div>
       )}
       {openGetFiles && (
         <GetFiles images={images} />
       )}
-    
+
+
     </>
   );
 };

@@ -12,8 +12,9 @@ import Signup from './pages/signup/Signup.jsx'
 
 const router = createBrowserRouter([
     {
-        path: "/",
-        element: <LogIn />,
+        // if theres a token, go to dashboard
+        path: '/',
+        element: <LogIn />
     },
     {
         path: 'signup',
