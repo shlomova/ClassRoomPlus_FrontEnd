@@ -48,6 +48,10 @@ const Login = () => {
     }
     navigate('/');
   };
+    const handleLogout = () => {
+        localStorage.removeItem('userInfo');
+        window.location.href = '/login';
+    };
 
   return (
     <>

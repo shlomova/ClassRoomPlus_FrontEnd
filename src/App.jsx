@@ -7,6 +7,9 @@ import Subjects from './Components/subjects/subjects';
 import Chatbot from './Components/chatbot/chatbot';
 import CourseItem from './Components/course-item/courseItem';
 import Subscription from './Components/subscribe/subscribe';
+import Header from './Components/header/Header'
+import { Link } from 'react-router-dom'
+
 
 function App() {
   const [addCourse, setAddCourse] = useState(false);
@@ -15,6 +18,7 @@ function App() {
   const [userId, setUserId] = useState('');
   const [selectedCourse, setSelectedCourse] = useState(null);
   const checkUserAndToken = UtilsCheckUserAndToken();
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -35,6 +39,11 @@ function App() {
       setUserId(`${data.user._id}`);
     }
   }, []);
+    const handleLogout = () => {
+        localStorage.removeItem('userInfo');
+        window.location.href = '/login';
+    };
+
 
   const handleButton = () => {
     setAddCourse(!addCourse);
@@ -49,9 +58,11 @@ function App() {
     setSelectedCourse(course);
   };
 
+
   return (
     <>
       <div>
+        <Header showLinks={true} />
         <Chatbot onNavigateToCourse={handleNavigateToCourse} />
         {selectedCourse ? (
           <>

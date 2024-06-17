@@ -24,7 +24,7 @@ const Chatroom = ({ courseId }) => {
             const response = await axios.get(`http://localhost:3000/posts/course/${courseId}`, {
                 withCredentials: true
             });
-            setMessages(response.data.posts);
+            setMessages(response.data.posts); // Assuming response.data.posts is an array of posts
         } catch (error) {
             console.error('Error fetching messages:', error);
         }
@@ -32,7 +32,7 @@ const Chatroom = ({ courseId }) => {
 
     useEffect(() => {
         fetchMessages();
-    }, [courseId]);
+    }, [courseId]); // Fetch messages whenever courseId changes
 
     const handleSendMessage = async () => {
         if (!newMessage.trim()) return;
@@ -67,10 +67,10 @@ const Chatroom = ({ courseId }) => {
                 {messages.map((message) => (
                     <div
                         key={message._id}
-                        className={`message ${message.userId === user._id ? 'my-message' : 'other-message'}`}
+                        className={`message ${message.userId === user?._id ? 'my-message' : 'other-message'}`}
                     >
                         <div>{message.postData}</div>
-                        {message.userId === user._id && (
+                        {message.userId === user?._id && (
                             <button onClick={() => handleDeleteMessage(message._id)}>Delete</button>
                         )}
                     </div>

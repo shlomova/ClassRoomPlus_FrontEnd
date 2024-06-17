@@ -12,6 +12,7 @@ import GetFiles from '../../Components/getFiles/getFiles'
 import Chatbot from '../../Components/chatbot/chatbot'
 
 
+import Header from '../../Components/header/Header'
 
 
 const ContentsClass = () => {
@@ -20,24 +21,22 @@ const ContentsClass = () => {
   const [people, setPeople] = useState(null)
   const [chats, setChats] = useState(null)
   const [openPostFile, setOpenPostFile] = useState(null)
-  const [openGetFiles, setOpenGetFiles] = useState(null)
   const location = useLocation()
+  const [openGetFiles, setOpenGetFiles] = useState(null)
   const { openDate, endDate, courseId, courseName, description, price } = location.state || {};
 
   useEffect(() => {
     checkUserAndToken()
   }, [])
   const [images, setImages] = useState([]);
-  // const [filesIds, setFilesIds] = useState([])
   useEffect(() => {
     const fetchFiles = async () => {
       try {
         const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
-        // setFilesIds(res.data.files.map(item => item._id))
+        console.log(res);
         const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000${item.file}` }))
         console.log(files);
         setImages(files);
-
       } catch (error) {
         console.log(error);
       }
@@ -62,7 +61,6 @@ const ContentsClass = () => {
     setCourses(false)
     setChats(false)
     setOpenPostFile(false)
-    setOpenGetFiles(false)
 
   }
   const handleChats = () => {
@@ -70,7 +68,6 @@ const ContentsClass = () => {
     setCourses(false)
     setPeople(false)
     setOpenPostFile(false)
-    setOpenGetFiles(false)
 
 
 
@@ -80,13 +77,13 @@ const ContentsClass = () => {
     setPeople(false)
     setChats(false)
     setOpenPostFile(false)
-    setOpenGetFiles(false)
 
 
   }
   const handleButtonPostFile = () => {
     setOpenPostFile(true)
   }
+ 
   const handleButtonGetFiles = () => {
     setOpenGetFiles(true)
   }
@@ -94,6 +91,7 @@ const ContentsClass = () => {
 
   return (
     <>
+    <Header showLinks={false} showPartLinks={true}/> 
       <Chatbot />
       <div id='theContainer1'>
 
@@ -118,7 +116,6 @@ const ContentsClass = () => {
               <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
               <li >{price}</li>
               <button id='PostFile' onClick={handleButtonPostFile}> post file</button>
-              <button id='PostFile' onClick={handleButtonGetFiles}> get files</button>
             </ul>
             {isOpen && (
               <div id="popup" style={{ top: position.top, left: position.left }}>
@@ -127,6 +124,8 @@ const ContentsClass = () => {
               </div>
             )}
           </div>
+        <GetFiles images={images} />
+
         </>
       )}
       {people && (
@@ -145,8 +144,7 @@ const ContentsClass = () => {
       {openGetFiles && (
         <GetFiles images={images} />
       )}
-
-
+    
     </>
   );
 };

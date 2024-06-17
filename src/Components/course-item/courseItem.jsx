@@ -4,8 +4,10 @@ import { useNavigate } from "react-router-dom";
 import Subscription from "../subscribe/subscribe";
 import DeleteSubscription from "../DeleteSubscription/DeleteSubscription";
 
-const CourseItem = ({ openDate, endDate, id, courseName, description, price, userId, courseId }) => {
+const CourseItem = ({ openDate, endDate, id, courseName, description, price, userId,courseId }) => {
   const [subscribe, setSubscribe] = useState(false);
+  console.log(  id,courseId,userId);
+
   const [Deltesubscribe, setDeleteSubscribe] = useState(false);
   const [showSubscription, setShowSubscription] = useState();
   const [showDeleteSubscription, setDeleteShowSubscription] = useState();
@@ -28,6 +30,7 @@ const CourseItem = ({ openDate, endDate, id, courseName, description, price, use
 
   const userInfo = localStorage.getItem('userInfo');
   const { data } = JSON.parse(userInfo);
+
 
   return (
     <>
@@ -53,7 +56,7 @@ const CourseItem = ({ openDate, endDate, id, courseName, description, price, use
         </div>
         {subscribe && (
           <Subscription
-            user={data.user}
+            user={data}
             courseId={courseId}
             showSubscription={showSubscription}
             setShowSubscription={setShowSubscription}
@@ -61,7 +64,7 @@ const CourseItem = ({ openDate, endDate, id, courseName, description, price, use
         )}
         {Deltesubscribe && (
           <DeleteSubscription
-            user={data.user}
+            user={data}
             courseId={courseId}
             showDeleteSubscription={showDeleteSubscription}
             setDeleteShowSubscription={setDeleteShowSubscription}

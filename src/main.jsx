@@ -10,6 +10,7 @@ import Home from './pages/home/Home.jsx';
 import Verifi from './pages/approve/Verifi.jsx';
 import Signup from './pages/signup/Signup.jsx'
 
+
 const router = createBrowserRouter([
     {
         // if theres a token, go to dashboard
@@ -28,6 +29,7 @@ const router = createBrowserRouter([
         path: '/App',
         element: <App />
     },
+
     // {
     //     path: 'addCourse',
     //     element: <AddCourse/>
