@@ -25,7 +25,7 @@ const Login = () => {
       console.log(data);
       if (data) {
         localStorage.setItem('userInfo', JSON.stringify(data));
-        navigate('/dashboashrd');
+        navigate('/dashboard');
         return;
       }
     } catch (error) {
