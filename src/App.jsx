@@ -61,7 +61,7 @@ function App() {
                 />
                 </div>
          
-            <button id='AppButton' onClick={handleButton}> To add a new course  </button>
+            <button className='btn btn-primary' id='AppButton' onClick={handleButton}> To add a new course  </button>
             {addCourse && (
                 <AddCourse onClose={handleClose} userId={userId} />
             )}

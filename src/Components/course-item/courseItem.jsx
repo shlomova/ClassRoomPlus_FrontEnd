@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom"
 import Subscription from "../subscribe/subscribe"
 import DeleteSubscription from "../DeleteSubscription/DeleteSubscription"
 
-const CourseItem = ({ openDate, endDate, id, courseName, description, price, userId, courseId }) => {
+const CourseItem = ({ openDate, endDate, id, courseName, description, price, userId, courseId, subscription }) => {
   const [subscribe, setSubscribe] = useState(false)
   const [Deltesubscribe, setDeleteSubscribe] = useState(false)
   const [showSubscription, setShowSubscription] = useState();
@@ -12,7 +12,7 @@ const CourseItem = ({ openDate, endDate, id, courseName, description, price, use
   const navigate = useNavigate()
   const handleButton = () => {
     console.log({ openDate, endDate, courseId, courseName, description, price });
-    navigate('/contentsClass', { state: { openDate, endDate, courseId, courseName, description, price } })
+    navigate('/contentsClass', { state: { openDate, endDate, courseId, courseName, description, price, subscription } })
   }
   const handleSubscribe = () =>{
     setSubscribe(true)

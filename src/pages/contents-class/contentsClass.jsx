@@ -3,7 +3,7 @@ import './contentsClass.css'
 import axios from 'axios'
 import { useState } from 'react'
 import { useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { json, useLocation } from 'react-router-dom'
 import ContentsClassPeople from '../../Components/contents-class-people/ContentsClassPeople'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
 import AddFile from '../../Components/addFile/AddFile'
@@ -18,19 +18,27 @@ const ContentsClass = () => {
   const [chats, setChats] = useState(null)
   const [openPostFile, setOpenPostFile] = useState(null)
   const location = useLocation()
-  const { openDate, endDate, courseId, courseName, description, price } = location.state || {};
+  const [teacher, setTeacher] = useState(false)
+  const { openDate, endDate, courseId, courseName, description, price, subscription } = location.state || {};
+  const userInfo = localStorage.getItem('userInfo');
+  const {data} = JSON.parse(userInfo)
+  const theUserId = data.user._id 
+
+  const isTeacher = subscription.filter(check => check.userId == theUserId)
 
   useEffect(() => {
-    checkUserAndToken()
-  }, [])
+    checkUserAndToken();
+    if (isTeacher.length > 0 && isTeacher[0].role === 'teacher') {
+      setTeacher(true);
+    }
+  }, [checkUserAndToken, isTeacher]);
+  
   const [images, setImages] = useState([]);
   useEffect(() => {
     const fetchFiles = async () => {
       try {
         const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
-        console.log(res);
         const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000${item.file}` }))
-        console.log(files);
         setImages(files);
       } catch (error) {
         console.log(error);
@@ -103,7 +111,9 @@ const ContentsClass = () => {
               <li >{endDate}</li>
               <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
               <li >{price}</li>
+              {teacher && (
               <button id='PostFile' onClick={handleButtonPostFile}> post file</button>
+            )}
             </ul>
             {isOpen && (
               <div id="popup" style={{ top: position.top, left: position.left }}>
