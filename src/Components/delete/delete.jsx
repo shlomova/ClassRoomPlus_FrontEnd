@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useEffect } from 'react';
 import './delete.css';
 import axios from 'axios';
 
@@ -6,6 +7,16 @@ const Delete = ({ categories }) => {
     const [selectedCategoryId, setSelectedCategoryId] = useState("All");
     const [showConfirm, setShowConfirm] = useState(false);
     const [showErrror, setShowError] = useState(false);
+    
+    const userInfo = localStorage.getItem('userInfo');
+    const {data} = JSON.parse(userInfo)
+  
+  
+    useEffect(() => {
+        console.log(data);
+        console.log(categories)
+    }, []);
+    
 
 
     const handleSelect = async (event) => {
@@ -56,14 +67,14 @@ const Delete = ({ categories }) => {
                         </option>
                     ))}
                 </select>
-            {/* {showErrror && (
+            {showErrror && (
                 <div className="confirm-modal">
                     <p>Sorry but you do not have permission</p>
                     <div className="buttons">
                         <button className="confirm" onClick={handleBotton}>ok</button>
                     </div>
                 </div>
-            )} */}
+            )}
             {showConfirm && (
                 <div className="confirm-modal">
                     <p>Are you sure you want to delete this course?</p>
