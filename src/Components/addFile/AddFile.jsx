@@ -12,7 +12,6 @@ function AddFile({courseId}) {
   const handleOnChange = e => {
     const { name, value } = e.target
     setFormDetails({ ...formDetails, [name]: value })
-    console.log(formDetails == 10);
   }
 
   const handleFile = e => {
@@ -28,20 +27,23 @@ function AddFile({courseId}) {
       .then((res) => {
         console.log(res.data)
         console.log(res.data.file.file);
-        setImage(`http://localhost:3000${res.data.file.file}`)
-        console.log(image);
+        const imageUrl = `http://localhost:3000/${res.data.file.file}`;
+        console.log(imageUrl);
+        setImage(imageUrl);
+        console.log(image); 
       })
       .catch(err => console.log(err))
   }
-
+  
   return (
     <>
       <main id='theFile'>
-        <h1>Upload an image</h1>
+        {/* <h1>Upload an image</h1> */}
         <form className='form' onSubmit={handleSubmit}>
-        <input type="file" name="file" accept=".jpg,.jpeg,.png,.doc,.docx,.pdf" onChange={handleFile} />
-          <input type="text" name="username" placeholder={'Username'} onChange={handleOnChange} />
-          <input type="text" name="email" placeholder={'Email'} onChange={handleOnChange} />
+        <input id='theIn'  type="file" name="file" accept=".jpg,.jpeg,.png,.doc,.docx,.pdf" onChange={handleFile} />
+        <input  id='inputs' type="text" name="post" placeholder='post'  onChange={handleOnChange} />
+          {/* <input type="text" name="username" placeholder={'Username'} onChange={handleOnChange} />
+          <input type="text" name="email" placeholder={'Email'} onChange={handleOnChange} /> */}
           <input className='submit' type="submit" value="Upload" />
         </form>
         {image &&
