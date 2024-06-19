@@ -5,7 +5,9 @@ import Update from '../upDate/upDate';
 import Delete from '../delete/delete';
 
 const Subjects = ({ courses, setCourses, categories }) => {
+    console.log(courses);
     const [userCourses, setUserCourses] = useState([]);
+    const [loading, setLoading] = useState(true); // New loading state
 
     // Fetch user courses from localStorage on component mount
     useEffect(() => {
@@ -15,6 +17,7 @@ const Subjects = ({ courses, setCourses, categories }) => {
         }
     }, []);
 
+    // Handle category selection
     const handleSelect = async (event) => {
         const { value } = event.target;
         try {
@@ -23,6 +26,7 @@ const Subjects = ({ courses, setCourses, categories }) => {
                 url += `${value}`;
             }
             const { data } = await axios.get(url, { withCredentials: true });
+            console.log(data);
 
             // Filter courses based on user's subscribed courses
             const filteredCourses = data.courses.filter(course => userCourses.includes(course._id));
@@ -33,6 +37,17 @@ const Subjects = ({ courses, setCourses, categories }) => {
         }
     };
 
+    // Check if categories is defined
+    useEffect(() => {
+        if (categories) {
+            setLoading(false);
+        }
+    }, [categories]);
+
+    if (loading) {
+        return <div>Loading...</div>; // Show loading state if categories are not yet loaded
+    }
+
     return (
         <>
             <div className='d-flex mb-3'>
@@ -42,7 +57,7 @@ const Subjects = ({ courses, setCourses, categories }) => {
                 <div className='mr-7'>
                     <select onChange={handleSelect}>
                         <option value="All">All</option>
-                        {categories.map((category) => (
+                        {categories?.map((category) => (
                             <option key={category._id} value={category._id}>
                                 {category.courseName}
                             </option>

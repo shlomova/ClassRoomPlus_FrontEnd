@@ -19,19 +19,28 @@ function App() {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const checkUserAndToken = UtilsCheckUserAndToken();
 
-
+// need to check witch courses the user is subscribed to and only them to show
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const { data } = await axios.get('http://localhost:3000/courses');
-        setCoursesArr(data.courses);
-        setCategories(data.courses);
+        const response = await axios.get('http://localhost:3000/courses/byUser', { withCredentials: true });
+        console.log( 1,response);
+        const { data } = response;
+        if (!data) return <div>you are not in any courses</div>;
+        setCategories(data.categories);
+        setCoursesArr(data.userscourses)
+      
       } catch (error) {
         console.error('Error fetching data:', error);
       }
     };
     fetchData();
   }, []);
+
+
+
+
+ 
 
   useEffect(() => {
     const data = checkUserAndToken();
@@ -41,7 +50,7 @@ function App() {
   }, []);
     const handleLogout = () => {
         localStorage.removeItem('userInfo');
-        window.location.href = '/login';
+        window.location.href = '/';
     };
 
 

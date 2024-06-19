@@ -1,6 +1,16 @@
 import React from 'react';
 import CourseItem from "../course-item/courseItem";
 
+
+const imageMapping = {
+    1: "../../assets/1.jpg",
+    2: "../../assets/2.jpg",
+    3: "../../assets/3.jpg",
+    4: "../../assets/4.jpg",
+    5: "../../assets/5.jpg",
+
+}
+
 const CoursesList = ({ courses }) => {
     return (
         <div className="row">
@@ -16,6 +26,8 @@ const CoursesList = ({ courses }) => {
                         price={course.price}
                         userId={course.userId}
                         courseId={course._id}
+                        backgroundImage = {imageMapping[course._id]}
+                        
                     />
                 </div>
             ))}
