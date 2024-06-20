@@ -27,7 +27,7 @@ function AddFile({ courseId }) {
         console.log(res.data);
         console.log(res.data.file.file);
         const imageUrl = `http://localhost:3000/${res.data.file.file.replace(/\\/g, '/')}`;
-        console.log(imageUrl);
+        // console.log(imageUrl);
         setImage(imageUrl);
         console.log(image);
       })
