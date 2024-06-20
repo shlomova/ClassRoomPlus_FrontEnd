@@ -21,8 +21,8 @@ const ContentsClass = () => {
   const [teacher, setTeacher] = useState(false)
   const { openDate, endDate, courseId, courseName, description, price, subscription } = location.state || {};
   const userInfo = localStorage.getItem('userInfo');
-  const {data} = JSON.parse(userInfo)
-  const theUserId = data.user._id 
+  const { data } = JSON.parse(userInfo)
+  const theUserId = data.user._id
 
   const isTeacher = subscription.filter(check => check.userId == theUserId)
 
@@ -32,13 +32,15 @@ const ContentsClass = () => {
       setTeacher(true);
     }
   }, [checkUserAndToken, isTeacher]);
-  
+
   const [images, setImages] = useState([]);
   useEffect(() => {
     const fetchFiles = async () => {
       try {
+        console.log('hey');
         const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
-        const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000${item.file}` }))
+        const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000/${item.file}`}))
+        console.log(files);
         setImages(files);
       } catch (error) {
         console.log(error);
@@ -84,13 +86,13 @@ const ContentsClass = () => {
 
   }
   const handleButtonPostFile = () => {
-     setOpenPostFile(true)
+    setOpenPostFile(true)
   }
- 
+
 
   return (
     <>
-    <Header showLinks={false} showPartLinks={true}/>
+      <Header showLinks={false} showPartLinks={true} />
       <div id='theContainer1'>
 
         <button onClick={handleCourses} className='mx-3' id={courses ? 'Courses1' : 'none'}> Courses</button>
@@ -100,31 +102,30 @@ const ContentsClass = () => {
       <div id='theCourses1'>
         <h1>{courseName}</h1>
       </div>
-      {courses &&  !openPostFile &&(
-        <>
-          <div id='theUl1'>
-            <ul id='ul'>
-              <li id='theLi'>
-                <h2>{courseName}</h2>
-              </li>
-              <li >{openDate}</li>
-              <li >{endDate}</li>
-              <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
-              <li >{price}</li>
-              {teacher && (
+      {courses && !openPostFile && (
+      <>
+        <div id='theUl1'>
+          <ul id='ul'>
+            <li id='theLi'>
+              <h2>{courseName}</h2>
+            </li>
+            <li >{openDate}</li>
+            <li >{endDate}</li>
+            <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
+            <li >{price}</li>
+            {teacher && (
               <button id='PostFile' onClick={handleButtonPostFile}> post file</button>
             )}
-            </ul>
-            {isOpen && (
-              <div id="popup" style={{ top: position.top, left: position.left }}>
-                <span className="close" onClick={togglePopup}>&times;</span>
-                <p>Here goes the text of the description.</p>
-              </div>
-            )}
-          </div>
-        <GetFiles images={images} />
-
-        </>
+          </ul>
+          {isOpen && (
+            <div id="popup" style={{ top: position.top, left: position.left }}>
+              <span className="close" onClick={togglePopup}>&times;</span>
+              <p>Here goes the text of the description.</p>
+            </div>
+          )}
+        </div>
+          <GetFiles images={images} teacher={teacher} />
+          </>
       )}
       {people && (
         <ContentsClassPeople courseId={courseId} />
@@ -137,10 +138,10 @@ const ContentsClass = () => {
       )}
       {openPostFile && (
         <div>
-        <AddFile courseId={courseId}/>
+          <AddFile courseId={courseId}/>
         </div>
       )}
-    
+
     </>
   );
 };
