@@ -13,6 +13,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     margin-bottom: 10px;
+    background-color: #f9f9f9;
 }
 
 .message {
@@ -20,6 +21,13 @@
     padding: 10px;
     border-radius: 5px;
     position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.message-content {
+    flex: 1;
 }
 
 .my-message {
@@ -34,24 +42,42 @@
 
 .input-container {
     display: flex;
+    align-items: center;
+    gap: 10px;
 }
 
-.input-container input {
+.input-container input[type="text"] {
     flex: 1;
     padding: 10px;
     border: 1px solid #ccc;
-    border-radius: 5px 0 0 5px;
+    border-radius: 5px;
 }
 
-.input-container button {
-    padding: 10px;
+.file-upload-label {
+    cursor: pointer;
+    color: #4CAF50;
+    font-size: 24px;
+}
+
+.input-container .send-button {
+    padding: 10px 20px;
     border: none;
     background-color: #4CAF50;
     color: white;
     cursor: pointer;
-    border-radius: 0 5px 5px 0;
+    border-radius: 5px;
 }
 
-.input-container button:hover {
+.input-container .send-button:hover {
     background-color: #45a049;
+}
+
+.delete-button {
+    background: none;
+    border: none;
+    color: red;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }

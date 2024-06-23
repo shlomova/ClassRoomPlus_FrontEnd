@@ -60,13 +60,13 @@ const Login = () => {
       <div className='maincontainer1'>
         <div className="login-container">
           <form className="login-form" onSubmit={handleLogin}>
-          <h2 className="login-title">Welcome to our classroom</h2>
+          <h2 className="login-title">Welcome to ClassRoom+</h2>
           
             <label className="login-label">Email:</label>
             <input
               className="login-input"
               type="email"
-              autoComplete="email" // הוספת תכונה להשלמה אוטומטית
+              autoComplete="email" //  this is for the browser to remember the email
               value={email}
               onChange={(e) => setEmail(e.target.value)}
             />

@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import './Header.css'
 
 const Header = ({ showLinks, showPartLinks }) => {
     const handleLogout = () => {
@@ -15,8 +16,14 @@ const Header = ({ showLinks, showPartLinks }) => {
                 <h1 className="fs-4">Class Room +</h1>
             </div>
             {showLinks && (
+             
                 <nav>
                     <ul className="d-flex list-unstyled mb-0">
+                    
+               
+                    <img className='friendimg'  src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' />
+                    
+             
                         <li className="nav-item">
                             <Link to="/dashboard" className="nav-link text-white px-3">Home</Link>
                         </li>
@@ -27,6 +34,7 @@ const Header = ({ showLinks, showPartLinks }) => {
                             <Link to="/App" className="nav-link text-white px-3">Courses</Link>
                         </li>
                         <li className="nav-item dropdown">
+                            
                             <select className="nav-link bg-dark text-white px-3" id="navbarDropdown" onChange={(e) => window.location.href = e.target.value}>
                                 <option value="" selected disabled>Account</option>
                                 <option value="/profile">View Profile</option>

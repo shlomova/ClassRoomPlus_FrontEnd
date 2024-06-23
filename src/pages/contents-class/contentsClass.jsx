@@ -17,6 +17,7 @@ import Header from '../../Components/header/Header'
 
 const ContentsClass = () => {
   const checkUserAndToken = UtilsCheckUserAndToken()
+  const [friends, setFriends] = useState([])
   const [courses, setCourses] = useState(true)
   const [people, setPeople] = useState(null)
   const [chats, setChats] = useState(null)
@@ -30,13 +31,30 @@ const ContentsClass = () => {
   }, [])
   const [images, setImages] = useState([]);
   useEffect(() => {
+    const fetchfriends = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3000/courses/${courseId}`, { withCredentials: true });
+        console.log(11,res);
+        setFriends(res.data.course.subscriptions);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchfriends()
+  }, [courseId])
+
+
+
+
+  useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
+        const res = await axios.get(`http://localhost:3000/files/courses/${courseId}`, { withCredentials: true });
         console.log(res);
         const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000${item.file}` }))
         console.log(files);
         setImages(files);
+
       } catch (error) {
         console.log(error);
       }
@@ -102,14 +120,24 @@ const ContentsClass = () => {
         <button onClick={handlePeople} className='mx-3' id={people ? 'Courses1' : 'people1'}>people</button>
       </div>
       <div id='theCourses1'>
-        <h1>{courseName}</h1>
+       
+       <h2>Friends</h2>
+                <div className='theFriends'>
+                  <div className='theFriend'>
+                    <img className='friendimg'  src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' />
+                    <p>name</p>
+                   
+                  </div>
+                
+                </div>
+
       </div>
       {courses && !openPostFile && (
         <>
           <div id='theUl1'>
             <ul id='ul'>
               <li id='theLi'>
-                <h2>{courseName}</h2>
+                <span>{courseName}</span>
               </li>
               <li >{openDate}</li>
               <li >{endDate}</li>

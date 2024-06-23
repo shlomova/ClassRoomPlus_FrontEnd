@@ -1,32 +1,22 @@
 import React, { useState, useEffect } from 'react';
+import { VscTrash,  } from "react-icons/vsc";
+import { FaPaperclip } from "react-icons/fa";
 import axios from 'axios';
 import './chatroom.css';
 
 const Chatroom = ({ courseId }) => {
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
-    const [user, setUser] = useState(null);
-
-    useEffect(() => {
-        const fetchUser = async () => {
-            try {
-                const response = await axios.get('http://localhost:3000/user/:', { withCredentials: true })
-                
-                setUser(response.data.user);
-            } catch (error) {
-                console.error('Error fetching user info:', error);
-            }
-        };
-        fetchUser();
-    }, []);
+    const [file, setFile] = useState(null);
+    const user = JSON.parse(localStorage.getItem('userInfo'));
+    const userId = user?.data.user._id;
 
     const fetchMessages = async () => {
         try {
             const response = await axios.get(`http://localhost:3000/posts/course/${courseId}`, {
                 withCredentials: true
             });
-            console.log(2,response.data.posts);
-            setMessages(response.data.posts); // Assuming response.data.posts is an array of posts
+            setMessages(response.data.posts);
         } catch (error) {
             console.error('Error fetching messages:', error);
         }
@@ -34,19 +24,23 @@ const Chatroom = ({ courseId }) => {
 
     useEffect(() => {
         fetchMessages();
-    }, [courseId]); // Fetch messages whenever courseId changes
+    }, [courseId]);
 
     const handleSendMessage = async () => {
-        if (!newMessage.trim()) return;
+        if (!newMessage.trim() && !file) return;
+
+        const formData = new FormData();
+        formData.append('postData', newMessage);
+        formData.append(' postFiles', file);
+        formData.append('courseId', courseId);
+        formData.append('userId', userId);
 
         try {
-            await axios.post(
-                'http://localhost:3000/posts',
-                { courseId, postData: newMessage },
-                { withCredentials: true }
-            );
+            console.log(courseId, formData, 'formData')
+            await axios.post(`http://localhost:3000/files/course/${courseId}`, formData, { withCredentials: true });
             setNewMessage('');
-            fetchMessages(); // Refresh messages
+            setFile(null);
+            fetchMessages();
         } catch (error) {
             console.error('Error sending message:', error);
         }
@@ -54,10 +48,8 @@ const Chatroom = ({ courseId }) => {
 
     const handleDeleteMessage = async (postId) => {
         try {
-            await axios.delete(`http://localhost:3000/posts/${postId}`, {
-                withCredentials: true
-            });
-            fetchMessages(); // Refresh messages
+            await axios.delete(`http://localhost:3000/posts/${postId}`, { withCredentials: true });
+            fetchMessages();
         } catch (error) {
             console.error('Error deleting message:', error);
         }
@@ -69,13 +61,16 @@ const Chatroom = ({ courseId }) => {
                 {messages.map((message) => (
                     <div
                         key={message._id}
-                        className={`message ${message.userId === user?._id ? 'my-message' : 'other-message'}`}
+                        className={`message ${message.userId === userId ? 'my-message' : 'other-message'}`}
                     >
-                        <div>{message.postData}
-                        {message.userId === user?._id && (
-                            <button onClick={() => handleDeleteMessage(message._id)}>Delete</button>
-                        )}
+                        <div className="message-content">
+                            {message.postData}
                         </div>
+                        {message.userId === userId && (
+                            <button className="delete-button" onClick={() => handleDeleteMessage(message._id)}>
+                                <VscTrash />
+                            </button>
+                        )}
                     </div>
                 ))}
             </div>
@@ -86,7 +81,16 @@ const Chatroom = ({ courseId }) => {
                     onChange={(e) => setNewMessage(e.target.value)}
                     placeholder="Type a message..."
                 />
-                <button onClick={handleSendMessage}>Send</button>
+                <label htmlFor="file-upload" className="file-upload-label">
+                    <FaPaperclip />
+                </label>
+                <input
+                    id="file-upload"
+                    type="file"
+                    style={{ display: 'none' }}
+                    onChange={(e) => setFile(e.target.files[0])}
+                />
+                <button className="send-button" onClick={handleSendMessage}>Send</button>
             </div>
         </div>
     );
