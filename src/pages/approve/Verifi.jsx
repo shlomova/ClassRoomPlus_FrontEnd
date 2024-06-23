@@ -27,7 +27,7 @@ const Verifi = () => {
     return (
         <div>
             <h1>Verification Page</h1>
-            <button className="btn btn-primary" onClick={() => navigate('/App')}>
+            <button className="btn btn-primary" onClick={() => navigate('/dashboard')}>
                 Back to Home
             </button>
         </div>
