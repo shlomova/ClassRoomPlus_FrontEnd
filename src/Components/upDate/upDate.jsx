@@ -6,12 +6,21 @@ const Update = ({ categories }) => {
     const [courseData, setCourseData] = useState({});
     const [selectedCategoryId, setSelectedCategoryId] = useState("All");
     const [showErrror, setShowError] = useState(false);
+    const userInfo = localStorage.getItem('userInfo');
+    const { data } = JSON.parse(userInfo);
 
 
     const handleSelect = async (event) => {
         const { value } = event.target;
         setSelectedCategoryId(value);
         const selectedCategory = categories.find(category => category._id === value);
+        const selectedCategoryByUserId = selectedCategory.userId;
+        console.log(selectedCategoryByUserId);
+        console.log(data.user._id);
+        if(selectedCategoryByUserId !== data.user._id){
+            setShowError(true)
+            return
+        }
         if (selectedCategory) {
             setCourseData({
                 courseName: selectedCategory.courseName,
@@ -104,14 +113,14 @@ const Update = ({ categories }) => {
                         </form>
                     </div>
                 )}
-                {/* {showErrror && (
+                {showErrror && (
                     <div className="confirm-modal">
                         <p>Sorry but you do not have permission</p>
                         <div className="buttons">
                             <button className="confirm" onClick={handleBotton}>ok</button>
                         </div>
                     </div>
-                )} */}
+                )}
             </>
         );
     };
