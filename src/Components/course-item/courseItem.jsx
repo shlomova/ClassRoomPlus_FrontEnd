@@ -1,21 +1,18 @@
 import React, { useState } from "react";
-import './courseItem.css';
 import { useNavigate } from "react-router-dom";
 import Subscription from "../subscribe/subscribe";
 import DeleteSubscription from "../DeleteSubscription/DeleteSubscription";
+import './courseItem.css'; // Import the CSS file
 
-const CourseItem = ({ openDate, endDate, id, courseName, description, price, userId, courseId, backgroundImage }) => {
+const CourseItem = ({ openDate, endDate, id, courseName, description, price, userId, courseId }) => {
   const [subscribe, setSubscribe] = useState(false);
-  console.log(id, courseId, userId);
-
   const [Deltesubscribe, setDeleteSubscribe] = useState(false);
-  const [showSubscription, setShowSubscription] = useState();
-  const [showDeleteSubscription, setDeleteShowSubscription] = useState();
+  const [showSubscription, setShowSubscription] = useState(false);
+  const [showDeleteSubscription, setDeleteShowSubscription] = useState(false);
   const navigate = useNavigate();
 
   const handleButton = () => {
-    console.log({ openDate, endDate, courseId, courseName, description, price });
-    navigate('/contentsClass', { state: { openDate, endDate, courseId, courseName, description, price, backgroundImage } });
+    navigate('/contentsClass', { state: { openDate, endDate, courseId, courseName, description, price } });
   };
 
   const handleSubscribe = () => {
@@ -31,10 +28,28 @@ const CourseItem = ({ openDate, endDate, id, courseName, description, price, use
   const userInfo = localStorage.getItem('userInfo');
   const { data } = JSON.parse(userInfo);
 
+  const imageMapping = {
+    1:'./../../assets/images/1.jpg',
+    2:'./../../assets/images/2.jpg',
+    3:'./../../assets/images/3.jpg',
+    4:'./../../assets/images/4.jpg',
+    5:'./../../assets/images/5.jpg',
+    6:'./../../assets/images/6.jpg',
+    7:'./../../assets/images/7.jpg',
+    8:'./../../assets/images/8.jpg',
+    9:'./../../assets/images/9.jpg',
+    10:'./../../assets/images/10.jpg',
+    11:'./../../assets/images/11.jpg',
+    12:'./../../assets/images/12.jpg',
+    13:'./../../assets/images/13.jpg',
+  };
+
+  const backgroundImage = imageMapping[courseId] || '';
+
   return (
     <>
-      <div className="card h-100" style={{ width: '18rem', height: '15rem', overflow: 'hidden', backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center' }}>
-        <div className="card-body d-flex flex-column" style={{ backgroundColor: 'rgba(255, 255, 255, 0.8)' }}>
+      <div className="card h-100 course-item" style={{ width: '18rem', overflow: 'hidden', backgroundImage: `url(${backgroundImage})` }}>
+        <div className="card-body d-flex flex-column">
           <div id="courseName" className="card-title">{courseName}</div>
           <div className="pCI card-text flex-grow-1" style={{ overflow: 'hidden', textOverflow: 'ellipsis', display: '-webkit-box', WebkitLineClamp: 3, WebkitBoxOrient: 'vertical' }}>{description}</div>
           <div className="d-flex justify-content-between mt-auto">

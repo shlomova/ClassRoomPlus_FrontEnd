@@ -9,6 +9,7 @@ import ContentsClass from './pages/contents-class/contentsClass.jsx';
 import Home from './pages/home/Home.jsx';
 import Verifi from './pages/approve/Verifi.jsx';
 import Signup from './pages/signup/Signup.jsx'
+import About from '././Components/header/About.jsx'
 
 
 const router = createBrowserRouter([
@@ -28,6 +29,11 @@ const router = createBrowserRouter([
     {
         path: '/App',
         element: <App />
+    },
+    {
+        path: '/About',
+        element: <About/>
+
     },
 
     // {
