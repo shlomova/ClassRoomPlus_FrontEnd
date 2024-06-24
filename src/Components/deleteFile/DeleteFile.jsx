@@ -2,8 +2,13 @@ import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import GetFiles from '../getFiles/getFiles';
 
+
+
 const DeleteFile = ({ theId}) => {
+    
+
     useEffect( () => {
+        
         console.log(theId);
         const fetchData = async() => {
         try{

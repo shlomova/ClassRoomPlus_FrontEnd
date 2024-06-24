@@ -6,21 +6,26 @@ const Update = ({ categories }) => {
     const [courseData, setCourseData] = useState({});
     const [selectedCategoryId, setSelectedCategoryId] = useState("All");
     const [showErrror, setShowError] = useState(false);
+    const [role, setRole] = useState('');
+ 
     const userInfo = localStorage.getItem('userInfo');
-    const { data } = JSON.parse(userInfo);
+    const {data} = JSON.parse(userInfo)
 
 
     const handleSelect = async (event) => {
         const { value } = event.target;
+        console.log(value);
         setSelectedCategoryId(value);
         const selectedCategory = categories.find(category => category._id === value);
         const selectedCategoryByUserId = selectedCategory.userId;
-        console.log(selectedCategoryByUserId);
-        console.log(data.user._id);
+        const selectedRole = selectedCategory.subscription.find(sub => sub.role == 'teacher')
+        console.log(selectedRole)
+        setRole(selectedRole.role)
         if(selectedCategoryByUserId !== data.user._id){
             setShowError(true)
             return
         }
+        console.log(selectedCategoryId);
         if (selectedCategory) {
             setCourseData({
                 courseName: selectedCategory.courseName,
@@ -28,7 +33,9 @@ const Update = ({ categories }) => {
                 endDate: new Date(selectedCategory.endDate).toISOString().split('T')[0],
                 description: selectedCategory.description,
                 price: selectedCategory.price,
-                courseId: value
+                courseId: value,
+                role:role
+                
             });
             
         }
@@ -51,8 +58,10 @@ const Update = ({ categories }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
+            console.log(role);
+            console.log(selectedCategoryId);
             await axios.put(`http://localhost:3000/courses/${courseData.courseId}`, courseData, { withCredentials: true });
-            window.location.reload();
+            window.location.reload()
         } catch (error) {
             console.error('Error updating course:', error);
         }
