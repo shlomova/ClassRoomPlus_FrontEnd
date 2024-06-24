@@ -12,7 +12,7 @@ const Header = ({ showLinks, showPartLinks }) => {
     return (
         <header className="d-flex flex-row justify-content-between align-items-center sticky-top bg-dark text-white p-3" style={{ height: '60px' }}>
             <div className="d-flex align-items-center">
-                <img src="./../../img/logo.png" alt="Site Logo" className="logo-image me-3" />
+                <img src="src\assets\logo1.jpg" alt="Site Logo" className="logo-image " />
                 <h1 className="fs-4">Class Room +</h1>
             </div>
             {showLinks && (
@@ -51,6 +51,9 @@ const Header = ({ showLinks, showPartLinks }) => {
                     <ul className="d-flex list-unstyled mb-0 w-100">
                         <li className="nav-item">
                             <Link to="/dashboard" className="nav-link text-white px-3">Home</Link>
+                        </li>
+                        <li className="nav-item">
+                            <Link to="/about" className="nav-link text-white px-3">About</Link>
                         </li>
                         <li className="nav-item dropdown">
                             <select className="nav-link bg-dark text-white px-3" id="navbarDropdown" onChange={(e) => window.location.href = e.target.value}>

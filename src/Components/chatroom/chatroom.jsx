@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { VscTrash,  } from "react-icons/vsc";
+import React, { useState, useEffect, useRef } from 'react';
+import { VscTrash } from "react-icons/vsc";
 import { FaPaperclip } from "react-icons/fa";
 import axios from 'axios';
 import './chatroom.css';
@@ -9,7 +9,12 @@ const Chatroom = ({ courseId }) => {
     const [newMessage, setNewMessage] = useState('');
     const [file, setFile] = useState(null);
     const user = JSON.parse(localStorage.getItem('userInfo'));
-    const userId = user?.data.user._id;
+    const userId = user.data.user._id;
+    const messagesEndRef = useRef(null);
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    };
 
     const fetchMessages = async () => {
         try {
@@ -17,6 +22,7 @@ const Chatroom = ({ courseId }) => {
                 withCredentials: true
             });
             setMessages(response.data.posts);
+            scrollToBottom();
         } catch (error) {
             console.error('Error fetching messages:', error);
         }
@@ -31,15 +37,19 @@ const Chatroom = ({ courseId }) => {
 
         const formData = new FormData();
         formData.append('postData', newMessage);
-        formData.append(' postFiles', file);
-        formData.append('courseId', courseId);
         formData.append('userId', userId);
+        formData.append('courseId', courseId);
+        if (file) {
+            formData.append('file', file);
+        }
 
         try {
-            console.log(courseId, formData, 'formData')
-            await axios.post(`http://localhost:3000/files/course/${courseId}`, formData, { withCredentials: true });
+            console.log('Form Data before sending:', ...formData.entries());
+            await axios.post(`http://localhost:3000/posts`, formData, { withCredentials: true });
+
             setNewMessage('');
             setFile(null);
+            document.getElementById('file-upload').value = null; // Reset file input
             fetchMessages();
         } catch (error) {
             console.error('Error sending message:', error);
@@ -73,6 +83,7 @@ const Chatroom = ({ courseId }) => {
                         )}
                     </div>
                 ))}
+                <div ref={messagesEndRef} />
             </div>
             <div className="input-container">
                 <input

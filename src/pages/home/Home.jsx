@@ -5,6 +5,7 @@ import Header from './../../Components/header/Header.jsx'
 import Chatbot from './../../Components/chatbot/chatbot.jsx'
 import Footer from './../../Components/footer/Footer.jsx'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
+import { Outlet } from 'react-router-dom'
 import { useEffect } from 'react'
 
 const Home = () => {
@@ -15,7 +16,9 @@ const Home = () => {
     return (
         <>
             <Chatbot />
-            <Header showLinks={true} />
+            <Header showLinks={true} showPartLinks={false} />
+            <Outlet />
+          
             <>
                 <HeroSection />
             </>

@@ -1,6 +1,9 @@
 /* Minimal custom CSS, using utility classes from Bootstrap and Tailwind */
 .logo-image {
-    height: 40px;
+    height: 80px;
+    width: 80px;
+    border-radius: 50% 50%;
+
 }
 
 h1 {

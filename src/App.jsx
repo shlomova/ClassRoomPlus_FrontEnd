@@ -71,9 +71,13 @@ function App() {
   return (
     <>
       <div>
-        <Header showLinks={true} />
+        <Header showLinks={true} showPartLinks={false} />
         <Chatbot onNavigateToCourse={handleNavigateToCourse} />
+        {addCourse && <AddCourse handleClose={handleClose} userId={userId}/>}
+        <button className="btn btn-primary" onClick={handleButton}>Add Course</button>
         {selectedCourse ? (
+         
+
           <>
             <CourseItem
               openDate={selectedCourse.openDate}
@@ -87,6 +91,8 @@ function App() {
             />
             <Subscription courseId={selectedCourse._id} userId={userId} />
           </>
+        
+
         ) : (
           <Subjects
             courses={coursesArr}
@@ -95,11 +101,9 @@ function App() {
           />
         )}
       </div>
-      <button id="AppButton" onClick={handleButton}>To add a new course</button>
-      {addCourse && (
-        <AddCourse onClose={handleClose} userId={userId} />
-      )}
     </>
+
+
   );
 }
 
