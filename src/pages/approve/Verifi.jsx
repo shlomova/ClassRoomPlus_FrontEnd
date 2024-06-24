@@ -34,7 +34,7 @@ const Verifi = () => {
                             <p className="card-text mb-4">
                                 Please verify your account to proceed. Check your email for the verification link.
                             </p>
-                            <button className="btn btn-primary" onClick={() => navigate('/App')}>
+                            <button className="btn btn-primary" onClick={() => navigate('/dashboard')}>
                                 Back to Home
                             </button>
                         </div>

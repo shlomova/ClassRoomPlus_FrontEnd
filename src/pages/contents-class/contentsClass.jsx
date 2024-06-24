@@ -3,7 +3,7 @@ import './contentsClass.css'
 import axios from 'axios'
 import { useState } from 'react'
 import { useRef } from 'react'
-import { useLocation } from 'react-router-dom'
+import { json, useLocation } from 'react-router-dom'
 import ContentsClassPeople from '../../Components/contents-class-people/ContentsClassPeople'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
 import Chatroom from '../../Components/chatroom/chatroom.jsx'
@@ -23,12 +23,21 @@ const ContentsClass = () => {
   const [chats, setChats] = useState(null)
   const [openPostFile, setOpenPostFile] = useState(null)
   const location = useLocation()
-  const [openGetFiles, setOpenGetFiles] = useState(null)
-  const { openDate, endDate, courseId, courseName, description, price } = location.state || {};
+  const [teacher, setTeacher] = useState(false)
+  const { openDate, endDate, courseId, courseName, description, price, subscription } = location.state || {};
+  const userInfo = localStorage.getItem('userInfo');
+  const { data } = JSON.parse(userInfo)
+  const theUserId = data.user._id
+
+  const isTeacher = subscription.filter(check => check.userId == theUserId)
 
   useEffect(() => {
-    checkUserAndToken()
-  }, [])
+    checkUserAndToken();
+    if (isTeacher.length > 0 && isTeacher[0].role === 'teacher') {
+      setTeacher(true);
+    }
+  }, [checkUserAndToken, isTeacher]);
+
   const [images, setImages] = useState([]);
   useEffect(() => {
     const fetchfriends = async () => {
@@ -49,9 +58,9 @@ const ContentsClass = () => {
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/files/courses/${courseId}`, { withCredentials: true });
-        console.log(res);
-        const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000${item.file}` }))
+        console.log('hey');
+        const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
+        const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000/${item.file}`}))
         console.log(files);
         setImages(files);
 
@@ -101,16 +110,11 @@ const ContentsClass = () => {
   const handleButtonPostFile = () => {
     setOpenPostFile(true)
   }
- 
-  const handleButtonGetFiles = () => {
-    setOpenGetFiles(true)
-  }
 
 
   return (
     <>
-    <Header showLinks={false} showPartLinks={true}/> 
-      <Chatbot />
+      <Header showLinks={false} showPartLinks={true} />
       <div id='theContainer1'>
 
 
@@ -133,28 +137,29 @@ const ContentsClass = () => {
 
       </div>
       {courses && !openPostFile && (
-        <>
-          <div id='theUl1'>
-            <ul id='ul'>
-              <li id='theLi'>
-                <span>{courseName}</span>
-              </li>
-              <li >{openDate}</li>
-              <li >{endDate}</li>
-              <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
-              <li >{price}</li>
+      <>
+        <div id='theUl1'>
+          <ul id='ul'>
+            <li id='theLi'>
+              <h2>{courseName}</h2>
+            </li>
+            <li >{openDate}</li>
+            <li >{endDate}</li>
+            <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
+            <li >{price}</li>
+            {teacher && (
               <button id='PostFile' onClick={handleButtonPostFile}> post file</button>
-            </ul>
-            {isOpen && (
-              <div id="popup" style={{ top: position.top, left: position.left }}>
-                <span className="close" onClick={togglePopup}>&times;</span>
-                <p>Here goes the text of the description.</p>
-              </div>
             )}
-          </div>
-        <GetFiles images={images} />
-
-        </>
+          </ul>
+          {isOpen && (
+            <div id="popup" style={{ top: position.top, left: position.left }}>
+              <span className="close" onClick={togglePopup}>&times;</span>
+              <p>Here goes the text of the description.</p>
+            </div>
+          )}
+        </div>
+          <GetFiles images={images} teacher={teacher} />
+          </>
       )}
       {people && (
         <ContentsClassPeople courseId={courseId} />
@@ -166,13 +171,10 @@ const ContentsClass = () => {
       )}
       {openPostFile && (
         <div>
-          <AddFile courseId={courseId} />
+          <AddFile courseId={courseId}/>
         </div>
       )}
-      {openGetFiles && (
-        <GetFiles images={images} />
-      )}
-    
+
     </>
   );
 };

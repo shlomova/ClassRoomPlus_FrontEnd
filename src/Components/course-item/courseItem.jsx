@@ -11,7 +11,7 @@ const CourseItem = ({ openDate, endDate, id, courseName, description, price, use
   const navigate = useNavigate();
 
   const handleButton = () => {
-    navigate('/contentsClass', { state: { openDate, endDate, courseId, courseName, description, price, courseimg } });
+    navigate('/contentsClass', { state: { openDate, endDate, courseId, courseName, description, price, courseimg, subscription } });
   };
 
   const handleSubscribe = () => {
