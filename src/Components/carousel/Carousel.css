@@ -69,3 +69,7 @@
   align-items: center;
   transition: background-color 0.3s ease;
 }
+
+.carousel-button:hover {
+  background-color: #0056b3; /* Darker color on hover */
+}

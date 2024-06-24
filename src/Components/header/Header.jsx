@@ -2,32 +2,17 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Header.css'
-import AddCourse from '../course-item/add-course/addCourse';
 
-
-
-
-
-
-const Header = ({ showLinks, showPartLinks, showLinkAddcourse}) => {
-    const [addCourse, setAddCourse] = React.useState(false);
-
+const Header = ({ showLinks, showPartLinks }) => {
     const handleLogout = () => {
         localStorage.removeItem('userInfo');
         window.location.href = '/';
     };
-    const handleButton = () => {
-        setAddCourse(!addCourse);
-    };
-    const handleClose = () => {
-        setAddCourse(false);
-    };
-
 
     return (
         <header className="d-flex flex-row justify-content-between align-items-center sticky-top bg-dark text-white p-3" style={{ height: '60px' }}>
             <div className="d-flex align-items-center">
-                <img src='./../../assets/logo.png' alt="Site Logo" className="logo-image me-3" />
+                <img src="./../../img/logo.png" alt="Site Logo" className="logo-image me-3" />
                 <h1 className="fs-4">Class Room +</h1>
             </div>
             {showLinks && (
@@ -37,32 +22,23 @@ const Header = ({ showLinks, showPartLinks, showLinkAddcourse}) => {
                     
                
                     <img className='friendimg'  src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' />
-
-
-                        {showLinkAddcourse && (
-                            <li className="nav-item">
-                            <Link to="/add-course" className="nav-link text-white px-3">Add Course</Link>
-                            </li>
-                            )}
                     
              
                         <li className="nav-item">
                             <Link to="/dashboard" className="nav-link text-white px-3">Home</Link>
                         </li>
                         <li className="nav-item">
-                            <Link to="/About" className="nav-link text-white px-3">About</Link>
+                            <Link to="/about" className="nav-link text-white px-3">About</Link>
                         </li>
                         <li className="nav-item">
                             <Link to="/App" className="nav-link text-white px-3">Courses</Link>
                         </li>
-                        
-                       
                         <li className="nav-item dropdown">
                             
                             <select className="nav-link bg-dark text-white px-3" id="navbarDropdown" onChange={(e) => window.location.href = e.target.value}>
                                 <option value="" selected disabled>Account</option>
                                 <option value="/profile">View Profile</option>
-                                <option value="/EditProfile">Edit Profile</option>
+                                <option value="/edit-profile">Edit Profile</option>
                                 <option value="/change-password">Change Password</option>
                                 <option value="/" onClick={handleLogout}>Logout</option>
                             </select>
@@ -76,11 +52,6 @@ const Header = ({ showLinks, showPartLinks, showLinkAddcourse}) => {
                         <li className="nav-item">
                             <Link to="/dashboard" className="nav-link text-white px-3">Home</Link>
                         </li>
-                        <li className="nav-item">
-                        {addCourse && <AddCourse handleClose={handleClose} />}
-                        <button className="btn btn-primary" onClick={handleButton}>Add Course</button>
-                        </li>
-
                         <li className="nav-item dropdown">
                             <select className="nav-link bg-dark text-white px-3" id="navbarDropdown" onChange={(e) => window.location.href = e.target.value}>
                                 <option value="#" selected disabled>Account</option>

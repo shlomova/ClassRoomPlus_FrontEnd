@@ -73,19 +73,16 @@ const Chatbot = ({ onNavigateToCourse }) => {
 
   return (
     <div>
-    <div className="chatbot-icon" onClick={toggleChatbot}>
-      <i className="fas fa-comment"></i>
-    </div>
+      <div className="chatbot-icon" onClick={toggleChatbot}>
+        <i className="fas fa-comment"></i>
+      </div>
 
-    {isOpen && (
-      <div className="chatbot-container">
-        <div className="chatbot-header">
-          <h1>I'm Chaty</h1>
-        </div>
-        <div className="chatbot-body">
+      {isOpen && (
+        <div className="chatbot-container">
+          <h1>I'm chaty</h1>
           <h2 className="question-title">{question?.greeting}</h2>
           {loading ? (
-            <div className="loading-spinner"></div>
+            <div>Loading...</div>
           ) : url ? (
             <div>Redirecting to <a href={url}>{url}</a></div>
           ) : question ? (
@@ -94,10 +91,9 @@ const Chatbot = ({ onNavigateToCourse }) => {
             <div>Loading...</div>
           )}
         </div>
-      </div>
-    )}
-  </div>
-);
+      )}
+    </div>
+  );
 };
 
 export default Chatbot;

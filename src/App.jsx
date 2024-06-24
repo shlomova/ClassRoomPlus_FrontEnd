@@ -73,8 +73,6 @@ function App() {
       <div>
         <Header showLinks={true} />
         <Chatbot onNavigateToCourse={handleNavigateToCourse} />
-        {addCourse && <AddCourse handleClose={handleClose} />}
-        <button className="btn btn-primary" onClick={handleButton}>Add Course</button>
         {selectedCourse ? (
           <>
             <CourseItem
@@ -96,9 +94,11 @@ function App() {
             categories={categories}
           />
         )}
-
-       
       </div>
+      <button id="AppButton" onClick={handleButton}>To add a new course</button>
+      {addCourse && (
+        <AddCourse onClose={handleClose} userId={userId} />
+      )}
     </>
   );
 }
