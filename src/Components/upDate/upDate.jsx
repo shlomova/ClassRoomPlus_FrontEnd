@@ -6,7 +6,6 @@ const Update = ({ categories }) => {
     const [courseData, setCourseData] = useState({});
     const [selectedCategoryId, setSelectedCategoryId] = useState("All");
     const [showErrror, setShowError] = useState(false);
-    const [role, setRole] = useState('');
  
     const userInfo = localStorage.getItem('userInfo');
     const {data} = JSON.parse(userInfo)
@@ -18,9 +17,6 @@ const Update = ({ categories }) => {
         setSelectedCategoryId(value);
         const selectedCategory = categories.find(category => category._id === value);
         const selectedCategoryByUserId = selectedCategory.userId;
-        const selectedRole = selectedCategory.subscription.find(sub => sub.role == 'teacher')
-        console.log(selectedRole)
-        setRole(selectedRole.role)
         if(selectedCategoryByUserId !== data.user._id){
             setShowError(true)
             return
@@ -34,7 +30,6 @@ const Update = ({ categories }) => {
                 description: selectedCategory.description,
                 price: selectedCategory.price,
                 courseId: value,
-                role:role
                 
             });
             
@@ -58,7 +53,6 @@ const Update = ({ categories }) => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            console.log(role);
             console.log(selectedCategoryId);
             await axios.put(`http://localhost:3000/courses/${courseData.courseId}`, courseData, { withCredentials: true });
             window.location.reload()

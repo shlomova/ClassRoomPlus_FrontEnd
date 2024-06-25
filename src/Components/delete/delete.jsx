@@ -11,7 +11,6 @@ const Delete = ({ categories }) => {
     const [selectedCategoryId, setSelectedCategoryId] = useState("All");
     const [showConfirm, setShowConfirm] = useState(false);
     const [showErrror, setShowError] = useState(false);
-    const [updetedCategory, setUpdetedCategory] = useState({})
     
 
 
@@ -20,16 +19,7 @@ const Delete = ({ categories }) => {
         setSelectedCategoryId(value);   
         const selectedCategory = categories.find(category => category._id === value);
         const selectedCategoryByUserId = selectedCategory.userId;
-        const selectedRole = selectedCategory.subscription.find(sub => sub.role == 'teacher')
-        console.log(selectedRole);
-        setUpdetedCategory({
-            theCategory: selectedCategory.courseName,
-            role: selectedRole.role
-        })
-        console.log(updetedCategory);
-        console.log();
-        console.log(selectedCategoryByUserId);
-        console.log(data.user._id);
+       
         if(selectedCategoryByUserId !== data.user._id){
             setShowError(true)
             return
@@ -38,11 +28,10 @@ const Delete = ({ categories }) => {
         const theValue = value
         if (value !== "All") {
             try{
-                console.log(updetedCategory);
                 await axios.delete(`http://localhost:3000/courses/${theValue}`, {withCredentials: true})
-                console.log('put');
                 setShowConfirm(true);
             }catch(error){
+                console.log('hear');
                 setShowError(true)
             }
             
@@ -52,7 +41,7 @@ const Delete = ({ categories }) => {
     const handleConfirmDelete = async () => {
         console.log(updetedCategory);
         try{
-        await axios.delete(`http://localhost:3000/courses/${selectedCategoryId}`, updetedCategory, {withCredentials: true})
+        await axios.delete(`http://localhost:3000/courses/${selectedCategoryId}`, {withCredentials: true})
         }
         catch (error) {
             console.error('Error delete course:', error);
