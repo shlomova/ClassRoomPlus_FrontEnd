@@ -84,3 +84,21 @@ img{
 #PostFile:hover {
     background-color: #45a049;
 }
+.theFriends{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+    margin-left: 50px;
+}
+.theFriend
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 50px;
+}
+.friendimg{
+    height: 50px;
+    border-radius: 50% 50%;
+}

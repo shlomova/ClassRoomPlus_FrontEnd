@@ -6,25 +6,34 @@ import { useRef } from 'react'
 import { json, useLocation } from 'react-router-dom'
 import ContentsClassPeople from '../../Components/contents-class-people/ContentsClassPeople'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
+import Chatroom from '../../Components/chatroom/chatroom.jsx'
 import AddFile from '../../Components/addFile/AddFile'
 import GetFiles from '../../Components/getFiles/getFiles'
+import Chatbot from '../../Components/chatbot/chatbot'
+
+
 import Header from '../../Components/header/Header'
 
 
 const ContentsClass = () => {
   const checkUserAndToken = UtilsCheckUserAndToken()
+  const [friends, setFriends] = useState([])
   const [courses, setCourses] = useState(true)
   const [people, setPeople] = useState(null)
   const [chats, setChats] = useState(null)
   const [openPostFile, setOpenPostFile] = useState(null)
   const location = useLocation()
   const [teacher, setTeacher] = useState(false)
-  const { openDate, endDate, courseId, courseName, description, price, subscription } = location.state || {};
+  const { openDate, endDate, courseId, courseName, description, price, subscription,userId } = location.state || {};
   const userInfo = localStorage.getItem('userInfo');
+  const avatar = JSON.parse(localStorage.getItem('avatar'));
+    const name = JSON.parse(userInfo).data.user.firstName
   const { data } = JSON.parse(userInfo)
   const theUserId = data.user._id
+  console.log(11, location.state)
 
-  const isTeacher = subscription.filter(check => check.userId == theUserId)
+
+  const isTeacher = (userId === theUserId) ? [{ role: 'teacher' }] : []
 
   useEffect(() => {
     checkUserAndToken();
@@ -35,6 +44,22 @@ const ContentsClass = () => {
 
   const [images, setImages] = useState([]);
   useEffect(() => {
+    const fetchfriends = async () => {
+      try {
+        const res = await axios.get(`http://localhost:3000/courses/${courseId}`, { withCredentials: true });
+        
+        setFriends(res.data.course.subscriptions);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    fetchfriends()
+  }, [courseId])
+
+
+
+
+  useEffect(() => {
     const fetchFiles = async () => {
       try {
         console.log('hey');
@@ -42,6 +67,7 @@ const ContentsClass = () => {
         const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000/${item.file}`}))
         console.log(files);
         setImages(files);
+
       } catch (error) {
         console.log(error);
       }
@@ -92,15 +118,29 @@ const ContentsClass = () => {
 
   return (
     <>
-      <Header showLinks={false} showPartLinks={true} />
+    <Header showLinks={false} showPartLinks={true}/> 
+      <Chatbot />
+
       <div id='theContainer1'>
+
+
 
         <button onClick={handleCourses} className='mx-3' id={courses ? 'Courses1' : 'none'}> Courses</button>
         <button onClick={handleChats} className='mx-3' id={chats ? 'Courses1' : 'chats'}>Chats</button>
         <button onClick={handlePeople} className='mx-3' id={people ? 'Courses1' : 'people1'}>people</button>
       </div>
       <div id='theCourses1'>
-        <h1>{courseName}</h1>
+       
+       <h2>Friends</h2>
+                <div className='theFriends'>
+                  <div className='theFriend'>
+                    <img className='friendimg'  src='avatar' alt='avatar' />
+                    <p>{name}</p>
+                   
+                  </div>
+                
+                </div>
+
       </div>
       {courses && !openPostFile && (
       <>
@@ -132,8 +172,7 @@ const ContentsClass = () => {
       )}
       {chats && (
         <div>
-          <p id='חיים'> שלום לחיים שבדרון</p>
-          <p id='חיים'> כאן זה התקפיד שלך למלא</p>
+          <Chatroom courseId={courseId} />
         </div>
       )}
       {openPostFile && (

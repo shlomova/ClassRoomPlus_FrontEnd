@@ -30,7 +30,6 @@ const CoursesSection = () => {
     
   return (
     <div className="courses-section">
-      <h2>Featured Courses</h2>
       <Carousel courses={courses} />
       
     </div>

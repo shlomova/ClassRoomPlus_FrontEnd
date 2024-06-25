@@ -1,19 +1,29 @@
 
 .maincontainer1{
+    background-image: url('src/assets/logo1.jpg');
+    background-size: cover;
+    background-position: center;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding-top: 20px;
-    background-color: #ffff;
+    
+   
 }
 
-.login-container{
-    width: 400px;
+
+.login-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 60px 20px;
+    width: 60%; /* Adjust as needed */
     padding: 40px;
-    background-color: #81adf9;
+    background-color: #a08ff73c;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    box-shadow: 0 0 10px rgb(0, 0, 0);
+    max-width: 600px; /* Example: Setting a max-width to prevent excessive width */
 }
+
 
 .login-form{
     display: flex;
@@ -24,13 +34,18 @@
 {
     font-size: 24px;
     font-weight: bold;
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .login-title span{
     color: #007bff;
 }
 .login-input{
+    width : 100%;
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -43,7 +58,7 @@
 }
 
 .login-button{
-    padding: 10px 20px;
+    padding: 10px 10px;
     border: none;
     border-radius: 5px;
     background-color: #007bff;

@@ -1,10 +1,13 @@
 
 
-.container {
+.maincontainer2 {
     display: flex;
     justify-content: center;
     align-items: center;
-    min-height: 100vh;
+   max-height: min-content;
+
+
+ 
 }
 
 .form-input {

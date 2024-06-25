@@ -1,8 +1,9 @@
-import CourseItem from "../course-item/courseItem"
+import React from 'react';
+import CourseItem from "../course-item/courseItem";
 
 const CoursesList = ({ courses }) => {
   return (
-
+<div className="container">
     <div className="row">
       {
         courses.map((course) => {
@@ -13,7 +14,7 @@ const CoursesList = ({ courses }) => {
               <CourseItem
                 openDate={openDate.toISOString().split('T')[0]}  
                 endDate={endDate.toISOString().split('T')[0]}
-                // img={course.img}
+                courseimg={course.courseimg}
                 id={course.userId}
                 courseName={course.courseName}
                 description={course.description}
@@ -28,7 +29,9 @@ const CoursesList = ({ courses }) => {
       )}
   
     </div>
-  )
-}
+</div>
+    
+  );
+};
 
-export default CoursesList
+export default CoursesList;

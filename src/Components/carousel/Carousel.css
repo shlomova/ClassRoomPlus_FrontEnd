@@ -1,14 +1,21 @@
-/* src/Components/carousel/Carousel.css */
-
 .carousel-container {
   position: relative;
   margin: 20px auto;
-  max-width: 800px; /* Adjust as needed */
+  max-width: 100%; /* Adjust to full width */
+  overflow: hidden;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 }
 
 .carousel {
   display: flex;
-  overflow-x: hidden;
+  width: 100%;
+  animation: scroll 20s linear infinite;
+}
+
+.carousel .col-md-4 {
+  flex: 0 0 auto;
+  min-width: 300px; /* Adjust based on your card width */
 }
 
 .carousel-buttons {
@@ -18,43 +25,16 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  align-items: center;
 }
 
 .carousel-button {
-  background-color: transparent;
+  background-color: #007bff;
+  color: white;
   border: none;
-  cursor: pointer;
-  font-size: 24px;
-  color: #333; /* Adjust color as needed */
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
-
-.carousel-button:first-child {
-  left: 10px;
-}
-
-.carousel-button:last-child {
-  right: 10px;
-}
-
-.carousel-button:hover {
-  color: #000; /* Adjust hover color as needed */
-}
-.carousel-buttons {
-  display: flex;
-  justify-content: space-between;
-  margin-top: 10px;
-}
-
-.carousel-button {
-  background-color: #007bff; /* Button color */
-  color: white; /* Text color */
-  border: none;
-  border-radius: 50%; /* Rounded shape */
-  width: 40px; /* Button width */
-  height: 40px; /* Button height */
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
   cursor: pointer;
   display: flex;
   justify-content: center;
@@ -63,5 +43,23 @@
 }
 
 .carousel-button:hover {
-  background-color: #0056b3; /* Darker color on hover */
+  background-color: #0056b3;
+}
+/* need that upon hover the transform stops */
+.carousel:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  10% {
+    transform: translateX(0);
+  }
+  90% {
+    transform: translateX(-100%);
+  }
+}
+
+.card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
 }
