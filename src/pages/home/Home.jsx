@@ -16,7 +16,7 @@ const Home = () => {
     return (
         <>
             <Chatbot />
-            <Header showLinks={true} showPartLinks={false} />
+            <Header showLinks={true} showPartLinks={false} showAdminLinks={false}/>
             <Outlet />
           
             <>

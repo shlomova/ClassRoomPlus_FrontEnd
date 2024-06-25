@@ -14,7 +14,7 @@ const CoursesList = ({ courses }) => {
               <CourseItem
                 openDate={openDate.toISOString().split('T')[0]}  
                 endDate={endDate.toISOString().split('T')[0]}
-                // img={course.img}
+                courseimg={course.courseimg}
                 id={course.userId}
                 courseName={course.courseName}
                 description={course.description}

@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import Header from './../../Components/header/Header';
+import AvatarModal from './../../../src/assets/avatars/AvatarModal';
 import './../LogIn/Login.css';
 import './signup.css';
-
 import { useNavigate } from 'react-router-dom';
 
 const SignUp = () => {
-    const navigate = useNavigate(); // Move useNavigate to the top-level of the component
-
+    const navigate = useNavigate();
+    const [avatar, setAvatar] = useState('');
     const [formData, setFormData] = useState({
         firstName: '',
         lastName: '',
@@ -16,10 +16,18 @@ const SignUp = () => {
         phone: '',
         password: '',
         confirmPassword: '',
-        role: 'user'
+        role: 'user',
+        avatar: ''
     });
-
     const [formErrors, setFormErrors] = useState({});
+    const [showAvatarModal, setShowAvatarModal] = useState(false);
+
+    const avatars = [
+        '/assets/avatars/avatar_1.jpg',
+        '/assets/avatars/avatar_2.jpg',
+        '/assets/avatars/avatar_3.jpg',
+        '/assets/avatars/avatar_4.jpg',
+    ];
 
     const handleChange = (e) => {
         const { id, value } = e.target;
@@ -28,25 +36,22 @@ const SignUp = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-      
         if (formData.password !== formData.confirmPassword) {
             setFormErrors({ confirmPassword: "Passwords don't match" });
             return;
         }
         try {
-            const response = await axios.post(`http://localhost:3000/users/signup`, formData);
+            const response = await axios.post('http://localhost:3000/users/signup', formData);
             navigate('/login');
-         
             alert('Please check your email to verify your account');
-           
         } catch (error) {
             console.error('Error registering user:', error.response?.data || error.message);
-            
         }
     };
 
-    const handlebottonchane = () => {
-        navigate('/verify'); 
+    const handleAvatarSelect = (selectedAvatar) => {
+        setFormData({ ...formData, avatar: selectedAvatar });
+        setShowAvatarModal(false);
     };
 
     return (
@@ -56,11 +61,18 @@ const SignUp = () => {
                 <div className="login-container">
                     <form className="login-form d-flex" onSubmit={handleSubmit}>
                         <h2 className="login-title">Sign Up</h2>
-                        <div className="mb-4 ">
+                        <div className="mb-4">
+                            <label htmlFor="avatar" className="login-label">Avatar</label>
+                            <div className="avatar-selection">
+                                <button type="button" className="login-button w-full py-2 rounded-md text-white font-semibold" onClick={() => setShowAvatarModal(true)}>Choose Avatar</button>
+                                {formData.avatar && <img src={formData.avatar} alt="Selected Avatar" className="selected-avatar" />}
+                            </div>
+                        </div>
+                        <div className="mb-4">
                             <label htmlFor="firstName" className="login-label">First Name</label>
                             <input type="text" className="login-input" id="firstName" value={formData.firstName} onChange={handleChange} required />
                         </div>
-                        <div className="mb-4 ">
+                        <div className="mb-4">
                             <label htmlFor="lastName" className="login-label">Last Name</label>
                             <input type="text" className="login-input" id="lastName" value={formData.lastName} onChange={handleChange} required />
                         </div>
@@ -85,6 +97,7 @@ const SignUp = () => {
                     </form>
                 </div>
             </div>
+            {showAvatarModal && <AvatarModal avatars={avatars} onSelect={handleAvatarSelect} onClose={() => setShowAvatarModal(false)} />}
         </div>
     );
 };

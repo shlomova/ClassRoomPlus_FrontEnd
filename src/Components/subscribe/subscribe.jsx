@@ -11,7 +11,7 @@ console.log (courseId)
     const fetchData = async () => {
       try {
         const response  = await axios.get(`http://localhost:3000/courses/${courseId}`, { withCredentials: true });
-        console.log(response.data.courses)
+        console.log( 111,response.data.courses)
         setCourse(response.data.courses)
         setIsLoading(false)
         } catch (error) {

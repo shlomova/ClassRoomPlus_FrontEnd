@@ -1,6 +1,5 @@
 
 .maincontainer1{
-
     background-image: url('src/assets/logo1.jpg');
     background-size: cover;
     background-position: center;
@@ -42,10 +41,11 @@
     color: #007bff;
 }
 .login-input{
+    width : 100%;
     flex-direction: column;
     display: flex;
     justify-content: space-between;
-    align-items: end;
+    align-items: center;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;

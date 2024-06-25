@@ -19,7 +19,7 @@ const AboutSection = ({ courses }) => {
 
   return (
   <>
-<Header showLinks={false} showPartLinks={true}/> 
+<Header showLinks={false} showPartLinks={true} /> 
      
     <div className="container py-5">
       <div className="bg-white p-5 rounded shadow">

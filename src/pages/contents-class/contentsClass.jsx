@@ -24,12 +24,16 @@ const ContentsClass = () => {
   const [openPostFile, setOpenPostFile] = useState(null)
   const location = useLocation()
   const [teacher, setTeacher] = useState(false)
-  const { openDate, endDate, courseId, courseName, description, price, subscription } = location.state || {};
+  const { openDate, endDate, courseId, courseName, description, price, subscription,userId } = location.state || {};
   const userInfo = localStorage.getItem('userInfo');
+  const avatar = JSON.parse(localStorage.getItem('avatar'));
+    const name = JSON.parse(userInfo).data.user.firstName
   const { data } = JSON.parse(userInfo)
   const theUserId = data.user._id
+  console.log(11, location.state)
 
-  const isTeacher = subscription.filter(check => check.userId == theUserId)
+
+  const isTeacher = (userId === theUserId) ? [{ role: 'teacher' }] : []
 
   useEffect(() => {
     checkUserAndToken();
@@ -43,7 +47,7 @@ const ContentsClass = () => {
     const fetchfriends = async () => {
       try {
         const res = await axios.get(`http://localhost:3000/courses/${courseId}`, { withCredentials: true });
-        console.log(11,res);
+        
         setFriends(res.data.course.subscriptions);
       } catch (error) {
         console.log(error);
@@ -114,7 +118,9 @@ const ContentsClass = () => {
 
   return (
     <>
-      <Header showLinks={false} showPartLinks={true} />
+    <Header showLinks={false} showPartLinks={true}/> 
+      <Chatbot />
+
       <div id='theContainer1'>
 
 
@@ -128,8 +134,8 @@ const ContentsClass = () => {
        <h2>Friends</h2>
                 <div className='theFriends'>
                   <div className='theFriend'>
-                    <img className='friendimg'  src='https://www.w3schools.com/howto/img_avatar.png' alt='avatar' />
-                    <p>name</p>
+                    <img className='friendimg'  src='avatar' alt='avatar' />
+                    <p>{name}</p>
                    
                   </div>
                 

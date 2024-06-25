@@ -45,6 +45,7 @@ const CouresesHeader = () => {
                                 openDate={course.openDate}
                                 endDate={course.endDate}
                                 userId={course.userId}
+                                courseimg = {course.courseimg}
                             />
                         </div>
                     )

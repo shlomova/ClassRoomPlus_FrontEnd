@@ -27,8 +27,8 @@ function AddFile({courseId}) {
       .then((res) => {
         console.log(res.data);
         console.log(res.data.file.file);
-        const imageUrl = `http://localhost:3000/${res.data.file.file.replace(/\\/g, '/')}`;
-        // console.log(imageUrl);
+        const imageUrl = `http://localhost:3000/${res.data.file.file}`;
+        console.log(imageUrl);
         setImage(imageUrl);
         console.log(image);
         console.log(res.data);
@@ -66,7 +66,7 @@ function AddFile({courseId}) {
       </main>
     </>
   );
-  );
+
 }
 
 export default AddFile;
