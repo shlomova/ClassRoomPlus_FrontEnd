@@ -18,19 +18,19 @@ function App() {
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [isSubscribed, setIsSubscribed] = useState(true);
   const [fetchError, setFetchError] = useState(false);
+  const [show, setShow] = useState(false);
+
   const checkUserAndToken = UtilsCheckUserAndToken();
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        console.log('Fetching data...');
         const response = await axios.get('http://localhost:3000/courses/byUser', { withCredentials: true });
-        console.log(1, response.data);
         const { data } = response;
         if (!data || data.userscourses.length === 0) {
           setIsSubscribed(false);
         } else {
-          setCategories(data.categories);
+          setCategories(data.userscourses);
           setCoursesArr(data.userscourses);
         }
       } catch (error) {
@@ -95,6 +95,7 @@ function App() {
             </>
           ) : (
             <Subjects
+              show={show}
               courses={coursesArr}
               setCourses={setCoursesArr}
               categories={categories}

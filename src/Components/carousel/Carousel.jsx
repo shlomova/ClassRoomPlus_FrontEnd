@@ -13,7 +13,6 @@ const Carousel = ({ courses }) => {
   const scrollRight = () => {
     setStartIndex((prevIndex) => (prevIndex === courses.courses.length - 1 ? 0 : prevIndex + 1));
   };
-
   if (!Array.isArray(courses.courses) || courses.courses.length === 0) {
     return <div className="carousel-container">No courses available</div>;
   }

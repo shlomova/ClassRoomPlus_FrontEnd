@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom'
 import './Dashboard.css'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken';
 
+
 const Dashboard = () => {
     const [name, setName] = useState()
     const navigate = useNavigate()
@@ -39,6 +40,7 @@ const Dashboard = () => {
                     </button>
                 </div>
             </div>
+            
         </>
 
     );
