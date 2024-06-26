@@ -23,10 +23,10 @@ const SignUp = () => {
     const [showAvatarModal, setShowAvatarModal] = useState(false);
 
     const avatars = [
-        '/assets/avatars/avatar_1.jpg',
-        '/assets/avatars/avatar_2.jpg',
-        '/assets/avatars/avatar_3.jpg',
-        '/assets/avatars/avatar_4.jpg',
+        'src/assets/avatars/avatar_1.jpg',
+        'src/assets/avatars/avatar_2.jpg',
+        'src/assets/avatars/avatar_3.jpg',
+        'src/assets/avatars/avatar_4.jpg',
     ];
 
     const handleChange = (e) => {
