@@ -30,14 +30,12 @@ const Subjects = ({ courses, setCourses, categories, show }) => {
             // Filter courses based on user's subscribed courses
             // const filteredCourses = data.course.filter(course => course.includes(course._id));
             // const filteredCourses = data.course.filter(course => course._id === value);
-            if (Array.isArray(data.course)) {
-                const filteredCourses = data.course.filter(course => course._id === value);
+            let coursesArray = Array.isArray(data.course) ? data.course : [data.course];
+            const filteredCourses = coursesArray.filter(course => course._id === value);
                 setCourses(filteredCourses);
-            } else {
-                console.error("Invalid data format:", data);
+      
             }
-            setCourses(filteredCourses);
-        } catch (error) {
+         catch (error) {
             console.error("Error fetching course data:", error);
         }
     };

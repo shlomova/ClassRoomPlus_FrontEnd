@@ -9,9 +9,7 @@ import Footer from './../../Components/footer/Footer.jsx'
 import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
 import { Outlet } from 'react-router-dom'
 import { useEffect } from 'react'
-import Update from '../../Components/upDate/upDate.jsx'
-import Delete from '../../Components/delete/delete.jsx'
-import CoursesList from '../../Components/courses-list/coursesList.jsx'
+
 import Subjects from '../../Components/subjects/subjects.jsx'
 
 
