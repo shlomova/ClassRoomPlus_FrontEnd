@@ -1,7 +1,7 @@
 import React from 'react';
 import CourseItem from "../course-item/courseItem";
 
-const CoursesList = ({ courses }) => {
+const CoursesList = ({ courses, show }) => {
   return (
 <div className="container">
     <div className="row">
@@ -22,6 +22,8 @@ const CoursesList = ({ courses }) => {
                 userId={course.userId}
                 courseId={course._id}
                 subscription={course.subscription}
+
+                show={show}
               />
             </div>
                 )

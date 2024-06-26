@@ -24,11 +24,9 @@ const Chatbot = ({ onNavigateToCourse }) => {
   const page = getPageIdentifier(location.pathname);
 
   const fetchData = async () => {
-    console.log(`Fetching question for page: ${page}, questionId: ${questionId}`);
     setLoading(true);
     try {
       const response = await fetchQuestion(page, questionId);
-      console.log('Fetched question:', response.data);
       setQuestion(response.data);
     } catch (error) {
       console.error('Error fetching question:', error);
@@ -42,11 +40,9 @@ const Chatbot = ({ onNavigateToCourse }) => {
   }, [questionId, location.pathname]);
 
   const handleOptionClick = async (optionId) => {
-    console.log('Option clicked:', optionId);
     setLoading(true);
     try {
       const response = await submitResponse(page, question.id, optionId);
-      console.log('Submit response:', response.data);
 
       if (response.data.nextQuestion) {
         setQuestionId(response.data.nextQuestion.id);
@@ -69,7 +65,6 @@ const Chatbot = ({ onNavigateToCourse }) => {
     setIsOpen(!isOpen);
   };
 
-  console.log('Current state:', { question, questionId, url, isOpen, loading });
 
   return (
     <div>
