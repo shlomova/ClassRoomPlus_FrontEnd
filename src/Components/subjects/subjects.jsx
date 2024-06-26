@@ -68,12 +68,12 @@ const Subjects = ({ courses, setCourses, categories, show }) => {
                         ))}
                     </select>
                 </div>
-                <div>
+                {/* <div>
                     <Update categories={categories} />
                 </div>
                 <div>
                     <Delete categories={categories} />
-                </div>
+                </div> */}
             </div>
             )}
             <div>
