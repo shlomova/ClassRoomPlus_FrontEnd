@@ -6,6 +6,7 @@ import './Header.css';
 const Header = ({ showLinks, showPartLinks }) => {
     const [isAdmin, setIsAdmin] = useState(false);
     const avatar = JSON.parse(localStorage.getItem('avatar'));
+    console.log(avatar);
     
     useEffect(() => {
         const userInfo = localStorage.getItem('userInfo');
@@ -61,7 +62,7 @@ const Header = ({ showLinks, showPartLinks }) => {
                     </ul>
                 </nav>
             )}
-            {showPartLinks && (
+            {showPartLinks && !isAdmin &&(
                 <nav>
                     <ul className="d-flex list-unstyled mb-0 w-100">
                         <li className="nav-item">
