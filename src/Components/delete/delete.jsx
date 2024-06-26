@@ -4,74 +4,66 @@ import './delete.css';
 import axios from 'axios';
 
 const Delete = ({ categories }) => {
-    
+
     const userInfo = localStorage.getItem('userInfo');
-    const {data} = JSON.parse(userInfo)
+    const { data } = JSON.parse(userInfo)
 
     const [selectedCategoryId, setSelectedCategoryId] = useState("All");
     const [showConfirm, setShowConfirm] = useState(false);
     const [showErrror, setShowError] = useState(false);
-    const [updetedCategory, setUpdetedCategory] = useState({})
-    
+    const [theValue, setTheValue] = useState('')
 
 
     const handleSelect = async (event) => {
         const { value } = event.target;
-        setSelectedCategoryId(value);   
+        setTheValue(value)
+        
+        setSelectedCategoryId(value);
         const selectedCategory = categories.find(category => category._id === value);
         const selectedCategoryByUserId = selectedCategory.userId;
-        const selectedRole = selectedCategory.subscription.find(sub => sub.role == 'teacher')
-        console.log(selectedRole);
-        setUpdetedCategory({
-            theCategory: selectedCategory.courseName,
-            role: selectedRole.role
-        })
-        console.log(updetedCategory);
-        console.log();
-        console.log(selectedCategoryByUserId);
-        console.log(data.user._id);
-        if(selectedCategoryByUserId !== data.user._id){
+
+        if (selectedCategoryByUserId !== data.user._id) {
             setShowError(true)
             return
         }
+        setShowConfirm(true);
 
-        const theValue = value
-        if (value !== "All") {
-            try{
-                console.log(updetedCategory);
-                await axios.delete(`http://localhost:3000/courses/${theValue}`, {withCredentials: true})
-                console.log('put');
-                setShowConfirm(true);
-            }catch(error){
-                setShowError(true)
-            }
-            
-        }
+        // const theValue = value
+        // if (value !== "All") {
+        // try{
+        //     await axios.delete(`http://localhost:3000/courses/${theValue}`, {withCredentials: true})
+        // setShowConfirm(true);
+        // }catch(error){
+        //     console.log('hear');
+        // }
+
+
     };
 
     const handleConfirmDelete = async () => {
-        console.log(updetedCategory);
-        try{
-        await axios.delete(`http://localhost:3000/courses/${selectedCategoryId}`, updetedCategory, {withCredentials: true})
+        if (theValue !== "All") {
+            try {
+                await axios.delete(`http://localhost:3000/courses/${selectedCategoryId}`, { withCredentials: true })
+            }
+            catch (error) {
+                console.error('Error delete course:', error);
+            }
+            setSelectedCategoryId("All");
+            window.location.reload();
+
+        };
+}
+
+        const handleCancelDelete = () => {
+            setShowConfirm(false);
+            setSelectedCategoryId("All");
+        };
+        const handleBotton = () => {
+            setShowError(false)
+            setSelectedCategoryId("All")
         }
-        catch (error) {
-            console.error('Error delete course:', error);
-        }
-        setSelectedCategoryId("All");
-        window.location.reload();
 
-    };
-
-    const handleCancelDelete = () => {
-        setShowConfirm(false);
-        setSelectedCategoryId("All");
-    };
-    const handleBotton = () =>{
-        setShowError(false)
-        setSelectedCategoryId("All")   
-    }
-
-    return (
+        return (
             <div>
                 <span className='title'>To Delete</span>
                 <select value={selectedCategoryId} onChange={handleSelect}>
@@ -82,25 +74,26 @@ const Delete = ({ categories }) => {
                         </option>
                     ))}
                 </select>
-            {showErrror && (
-                <div className="confirm-modal">
-                    <p>Sorry but you do not have permission</p>
-                    <div className="buttons">
-                        <button className="confirm" onClick={handleBotton}>ok</button>
+                {showErrror && (
+                    <div className="confirm-modal">
+                        <p>Sorry but you do not have permission</p>
+                        <div className="buttons">
+                            <button className="confirm" onClick={handleBotton}>ok</button>
+                        </div>
                     </div>
-                </div>
-            )}
-            {showConfirm && (
-                <div className="confirm-modal">
-                    <p>Are you sure you want to delete this course?</p>
-                    <div className="buttons">
-                        <button className="confirm" onClick={handleConfirmDelete}>Yes</button>
-                        <button className="cancel" onClick={handleCancelDelete}>No</button>
+                )}
+                {showConfirm && (
+                    <div className="confirm-modal">
+                        <p>Are you sure you want to delete this course?</p>
+                        <div className="buttons">
+                            <button className="confirm" onClick={handleConfirmDelete}>Yes</button>
+                            <button className="cancel" onClick={handleCancelDelete}>No</button>
+                        </div>
                     </div>
-                </div>
-            )}
-        </div>
-    );
-};
+                )}
+            </div>
+        );
+    ;
+}
 
 export default Delete;

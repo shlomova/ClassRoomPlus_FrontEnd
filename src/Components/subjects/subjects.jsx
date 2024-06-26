@@ -4,8 +4,7 @@ import axios from 'axios';
 import Update from '../upDate/upDate';
 import Delete from '../delete/delete';
 
-const Subjects = ({ courses, setCourses, categories }) => {
-    console.log(courses);
+const Subjects = ({ courses, setCourses, categories, show }) => {
     const [userCourses, setUserCourses] = useState([]);
     const [loading, setLoading] = useState(true); // New loading state
 
@@ -26,13 +25,17 @@ const Subjects = ({ courses, setCourses, categories }) => {
                 url += `${value}`;
             }
             const { data } = await axios.get(url, { withCredentials: true });
-            console.log(data);
+            console.log(data.course);
 
             // Filter courses based on user's subscribed courses
-            const filteredCourses = data.courses.filter(course => userCourses.includes(course._id));
-
-            setCourses(filteredCourses);
-        } catch (error) {
+            // const filteredCourses = data.course.filter(course => course.includes(course._id));
+            // const filteredCourses = data.course.filter(course => course._id === value);
+            let coursesArray = Array.isArray(data.course) ? data.course : [data.course];
+            const filteredCourses = coursesArray.filter(course => course._id === value);
+                setCourses(filteredCourses);
+      
+            }
+         catch (error) {
             console.error("Error fetching course data:", error);
         }
     };
@@ -50,6 +53,7 @@ const Subjects = ({ courses, setCourses, categories }) => {
 
     return (
         <>
+        {show&& (
             <div className='d-flex mb-3'>
                 <div className='mr-5'>
                     Choose a topic
@@ -71,8 +75,9 @@ const Subjects = ({ courses, setCourses, categories }) => {
                     <Delete categories={categories} />
                 </div>
             </div>
+            )}
             <div>
-                <CoursesList courses={courses} />
+                <CoursesList show={show} courses={courses} />
             </div>
         </>
     );

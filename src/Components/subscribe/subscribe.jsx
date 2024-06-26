@@ -3,6 +3,7 @@ import axios from 'axios';
 
 const Subscription = ({  user,courseId, showSubscription, setShowSubscription }) => {
 console.log (courseId)
+console.log('22222');
   const [course, setCourse] = useState({})
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState(null);

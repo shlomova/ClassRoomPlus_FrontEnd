@@ -3,8 +3,7 @@ import { useNavigate } from "react-router-dom";
 import Subscription from "../subscribe/subscribe";
 import DeleteSubscription from "../DeleteSubscription/DeleteSubscription";
 
-const CourseItem = ({ openDate, endDate, id, courseName, description, price, userId, courseId, courseimg ,subscription }) => {
-  
+const CourseItem = ({ openDate, endDate, id, courseName, description, price, userId, courseId, courseimg, subscription, show }) => {
   const [subscribe, setSubscribe] = useState(false);
   const [Deltesubscribe, setDeleteSubscribe] = useState(false);
   const [showSubscription, setShowSubscription] = useState(false);
@@ -45,10 +44,12 @@ const CourseItem = ({ openDate, endDate, id, courseName, description, price, use
         </div>
         <div className="d-flex justify-content-between mt-auto">
           <button className="btn btn-primary" id={id} onClick={handleButton}>Enter Course</button>
+            {show &&(
           <div className="d-flex flex-column">
             <button className="btn btn-secondary mb-1" id={id} onClick={handleSubscribe}>Subscribe</button>
             <button className="btn btn-danger" id={id} onClick={handleDeleteSubscribe}>Unsubscribe</button>
           </div>
+          )}
         </div>
         {subscribe && (
           <Subscription
