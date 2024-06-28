@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import './contentsClass.css';
 import axios from 'axios';
 import { useLocation } from 'react-router-dom';
@@ -21,14 +21,13 @@ const ContentsClass = () => {
   const [teacher, setTeacher] = useState(false);
   const { openDate, endDate, courseId, courseName, description, price, subscription, userId } = location.state || {};
   const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const avatar = JSON.parse(localStorage.getItem('avatar'));
+  const avatar = userInfo?.data?.user?.avatar;
   const name = userInfo?.data?.user?.firstName;
   const theUserId = userInfo?.data?.user?._id;
 
   const [images, setImages] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [position, setPosition] = useState({});
-  const targetRef = useRef(null);
 
   useEffect(() => {
     checkUserAndToken();
@@ -37,44 +36,22 @@ const ContentsClass = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
-        console.log(res.data);
-        const files = res.data.files;
-        setImages(files);
-      } catch (error) {
-        console.log(error);
-      }
-    };
-    fetchData();
-  }, [courseId]);
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
         const res = await axios.get(`http://localhost:3000/courses/${courseId}`, { withCredentials: true });
-        setFriends(res.data.course.subscriptions);
+        setFriends(res.data.course.subscription);
+         console.log('Friends:',friends);
         setTeacher(res.data.course.userId === theUserId);
-        // setImages (res.data.course.contents)
-        console.log(res.data.course.contents);
+  
+        const filesRes = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
+        setImages(filesRes.data.files);
+        console.log(1111, res.data.course);
+        console.log(1111, filesRes.data.files);
       } catch (error) {
         console.log(error);
       }
     };
     fetchData();
   }, [courseId]);
-
-
-
-  const togglePopup = () => {
-    if (targetRef.current) {
-      const { top, left } = targetRef.current.getBoundingClientRect();
-      const popupTopPosition = top + window.scrollY - 30;
-      setPosition({ top: popupTopPosition, left: left + window.scrollX });
-      setIsOpen(!isOpen);
-    }
-  };
-
+  
   const handlePeople = () => {
     setPeople(true);
     setCourses(false);
@@ -133,25 +110,18 @@ const ContentsClass = () => {
               </li>
               <li>{openDate}</li>
               <li>{endDate}</li>
-              <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
+              <li className='text-decoration-underline' id='De'>{description}</li>
               <li>{price}</li>
               {teacher && (
                 <button id='PostFile' onClick={handleButtonPostFile}>Post file</button>
               )}
             </ul>
-            {isOpen && (
-              <div id="popup" style={{ top: position.top, left: position.left }}>
-                <span className="close" onClick={togglePopup}>&times;</span>
-                <p>Here goes the text of the description.</p>
-              </div>
-            )}
           </div>
-           for 
           <GetFiles images={images} teacher={teacher} />
         </>
       )}
       {people && (
-        <ContentsClassPeople courseId={courseId} />
+        <ContentsClassPeople friends={friends} />
       )}
       {chats && (
         <div>

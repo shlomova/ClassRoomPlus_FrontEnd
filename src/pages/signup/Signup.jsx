@@ -93,7 +93,7 @@ const SignUp = () => {
                             <input type="password" className="login-input" id="confirmPassword" value={formData.confirmPassword} onChange={handleChange} required />
                             {formErrors.confirmPassword && <div className="text-red-500">{formErrors.confirmPassword}</div>}
                         </div>
-                        <button type="submit" className="login-button w-full py-2 rounded-md text-white font-semibold">Sign Up</button>
+                        <button type="submit" className="login-button w-full py-2 rounded-md text-white font-semibold" >Sign Up</button>
                     </form>
                 </div>
             </div>

@@ -4,19 +4,24 @@ import { Link } from 'react-router-dom';
 import './Header.css';
 
 const Header = ({ showLinks, showPartLinks }) => {
+    const [user, setUser] = useState({});
+    const [isuse, setIsUse] = useState(true);
     const [isAdmin, setIsAdmin] = useState(false);
-    const avatar = JSON.parse(localStorage.getItem('avatar'));
-    console.log(avatar);
-    
+
     useEffect(() => {
-        const userInfo = localStorage.getItem('userInfo');
-        if (userInfo) {
-            const user = JSON.parse(userInfo).data.user;
-            if (user.role === 'admin') {
-                setIsAdmin(true);
-            }
+        const userinfo = JSON.parse(localStorage.getItem('userInfo'));
+        if (!userinfo) {
+            setIsUse(false);
+        } else {
+            setUser(userinfo.data.user);
         }
     }, []);
+
+    useEffect(() => {
+        if (user.role === 'admin') {
+            setIsAdmin(true);
+        }
+    }, [user]);
 
     const handleLogout = () => {
         localStorage.removeItem('userInfo');
@@ -37,10 +42,10 @@ const Header = ({ showLinks, showPartLinks }) => {
                 <img src="src/assets/logo1.jpg" alt="Site Logo" className="logo-image" />
                 <h1 className="fs-4">Class Room +</h1>
             </div>
-            {showLinks && !isAdmin && (
+            {showLinks && !isAdmin && isuse && (
                 <nav>
                     <ul className="d-flex list-unstyled mb-0">
-                        <img className='friendimg' src={avatar} alt='avatar' />
+                        {user.avatar && <img className='friendimg' src={user.avatar} alt='avatar' />}
                         <li className="nav-item">
                             <Link to="/dashboard" className="nav-link text-white px-3">Home</Link>
                         </li>
@@ -51,8 +56,8 @@ const Header = ({ showLinks, showPartLinks }) => {
                             <Link to="/App" className="nav-link text-white px-3">Courses</Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <select className="nav-link bg-dark text-white px-3" id="navbarDropdown" onChange={handleSelectChange}>
-                                <option value="" selected disabled>Account</option>
+                            <select className="nav-link bg-dark text-white px-3" defaultValue="" onChange={handleSelectChange}>
+                                <option value="" disabled>Account</option>
                                 <option value="/profile">View Profile</option>
                                 <option value="/edit-profile">Edit Profile</option>
                                 <option value="/change-password">Change Password</option>
@@ -62,7 +67,7 @@ const Header = ({ showLinks, showPartLinks }) => {
                     </ul>
                 </nav>
             )}
-            {showPartLinks && !isAdmin &&(
+            {showPartLinks && !isAdmin && isuse && (
                 <nav>
                     <ul className="d-flex list-unstyled mb-0 w-100">
                         <li className="nav-item">
@@ -72,8 +77,8 @@ const Header = ({ showLinks, showPartLinks }) => {
                             <Link to="/about" className="nav-link text-white px-3">About</Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <select className="nav-link bg-dark text-white px-3" id="navbarDropdown" onChange={handleSelectChange}>
-                                <option value="#" selected disabled>Account</option>
+                            <select className="nav-link bg-dark text-white px-3" defaultValue="#" onChange={handleSelectChange}>
+                                <option value="#" disabled>Account</option>
                                 <option value="/profile">View Profile</option>
                                 <option value="/edit-profile">Edit Profile</option>
                                 <option value="/change-password">Change Password</option>
@@ -99,8 +104,8 @@ const Header = ({ showLinks, showPartLinks }) => {
                             <Link to="/admin" className="nav-link text-white px-3">Admin</Link>
                         </li>
                         <li className="nav-item dropdown">
-                            <select className="nav-link bg-dark text-white px-3" id="navbarDropdown" onChange={handleSelectChange}>
-                                <option value="#" selected disabled>Account</option>
+                            <select className="nav-link bg-dark text-white px-3" defaultValue="#" onChange={handleSelectChange}>
+                                <option value="#" disabled>Account</option>
                                 <option value="/profile">View Profile</option>
                                 <option value="/edit-profile">Edit Profile</option>
                                 <option value="/change-password">Change Password</option>

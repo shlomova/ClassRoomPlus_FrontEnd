@@ -33,7 +33,10 @@ function AddFile({ courseId, onFileUpload }) {
     axios
       .post(`http://localhost:3000/files/course/${courseId}`, formData, { withCredentials: true })
       .then((res) => {
-        const imageUrl = `http://localhost:3000/${correctFilePath(res.data.file.file)}`;
+        // console.log("File upload response:", res.data);
+
+        const imageUrl = `http://localhost:3000/files/course/${correctFilePath(res.data.file.file)}`;
+        console.log(res.data.file.file);
         setImage(imageUrl);
         onFileUpload({ ...res.data.file, file: imageUrl });
         setShowForm(false);
@@ -55,7 +58,7 @@ function AddFile({ courseId, onFileUpload }) {
             <input
               id='theIn'
               type='file'
-              name='file'
+              name=''
               accept='.jpg,.jpeg,.png,.doc,.docx,.pdf'
               onChange={handleFile}
             />
@@ -63,12 +66,18 @@ function AddFile({ courseId, onFileUpload }) {
               id='inputs'
               type='text'
               name='post'
-              placeholder='post'
+              placeholder='Post'
               onChange={handleOnChange}
             />
             <input className='submit' type='submit' value='Upload' />
           </form>
         </main>
+      )}
+      {!showForm && image && (
+        <div className="file-display">
+          <img src={image} alt="Uploaded file" className="file-image" />
+          <a href={image} className="file-link" target="_blank" rel="noopener noreferrer">View File</a>
+        </div>
       )}
     </>
   );
