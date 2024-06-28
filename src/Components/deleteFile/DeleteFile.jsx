@@ -14,7 +14,6 @@ const DeleteFile = ({ theId}) => {
         try{
         const respons = await axios.delete(`http://localhost:3000/files/${theId}`, {withCredentials: true})
         console.log('hey hey hey');
-        window.location.reload()
     }catch(err) {
         console.log(err)
     }
