@@ -4,8 +4,6 @@ import Subscription from "../subscribe/subscribe";
 import DeleteSubscription from "../DeleteSubscription/DeleteSubscription";
 
 const CourseItem = ({ openDate, endDate, id, courseName, description, price, userId, courseId, courseimg, subscription, show }) => {
-  console.log(courseName);
-  console.log(userId);
   const [subscribe, setSubscribe] = useState(false);
   const [Deltesubscribe, setDeleteSubscribe] = useState(false);
   const [showSubscription, setShowSubscription] = useState(false);
@@ -15,6 +13,7 @@ const CourseItem = ({ openDate, endDate, id, courseName, description, price, use
   const handleButton = () => {
     navigate('/contentsClass', { state: { openDate, endDate, courseId, courseName, description, price, userId, courseimg, subscription } });
   };
+  console.log(courseId);
 
   const handleSubscribe = () => {
     setSubscribe(true);
