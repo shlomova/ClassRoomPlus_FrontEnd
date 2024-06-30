@@ -62,17 +62,10 @@ const ContentsClass = () => {
   useEffect(() => {
     const fetchFiles = async () => {
       try {
-        console.log('hey');
         const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
-        console.log('gerate');
-        const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000/${item.file}` }))
-        console.log('blue');
-        console.log(files);
-        console.log('a');
-        setImages([files]);
-        console.log('b');
-        console.log(images);
-        console.log('c');
+        // const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000/${item.file}` }))
+        console.log(res.data.files);
+        setImages(res.data.files);
 
       } catch (error) {
         console.log(error);
@@ -121,8 +114,7 @@ const ContentsClass = () => {
     setOpenPostFile(true)
   }
 
-  console.log(images);
-
+ console.log(images);
   return (
     <>
       <Header showLinks={false} showPartLinks={true} />

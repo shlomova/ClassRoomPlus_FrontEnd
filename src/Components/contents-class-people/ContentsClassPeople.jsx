@@ -14,7 +14,6 @@ const ContentsClassPeople = ({ courseId }) => {
         const theCourseSubscriptions = data.courses.subscription;
 
         const filtered = theCourseSubscriptions.map(subscription => subscription.userId);
-        console.log('Filtered User IDs:', filtered);
 
         setSubscribed(filtered);
       } catch (error) {
