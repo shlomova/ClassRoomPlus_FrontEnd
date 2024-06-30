@@ -4,7 +4,7 @@ import GetFiles from '../getFiles/getFiles';
 
 
 
-const DeleteFile = ({ theId}) => {
+const   DeleteFile = ({ theId }) => {
     
 
     useEffect( () => {

@@ -14,8 +14,7 @@ const ContentsClassPeople = ({friends }) => {
 
   //       const theCourseSubscriptions = data.courses.subscription;
 
-  //       const filtered = theCourseSubscriptions.map(subscription => subscription.userId);
-  //       console.log('Filtered User IDs:', filtered);
+        const filtered = theCourseSubscriptions.map(subscription => subscription.userId);
 
   //       setSubscribed(filtered);
   //     } catch (error) {
