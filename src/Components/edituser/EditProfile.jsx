@@ -2,13 +2,21 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import './EditProfile.css';
 
-const EditProfile = () => {
+const EditProfile = ({ onClose }) => {
     const [user, setUser] = useState({});
     const [firstName, setFirstName] = useState('');
     const [lastName, setLastName] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [avatar, setAvatar] = useState('');
     const [error, setError] = useState('');
+
+    const avatars = [
+        'src/assets/avatars/avatar_1.jpg',
+        'src/assets/avatars/avatar_2.jpg',
+        'src/assets/avatars/avatar_3.jpg',
+        'src/assets/avatars/avatar_4.jpg',
+    ];
 
     useEffect(() => {
         const fetchUser = async () => {
@@ -17,6 +25,7 @@ const EditProfile = () => {
                 setUser(userInfo);
                 setFirstName(userInfo.firstName);
                 setLastName(userInfo.lastName);
+                setAvatar(userInfo.avatar);
             }
         };
         fetchUser();
@@ -32,6 +41,7 @@ const EditProfile = () => {
             const updatedUser = {
                 firstName,
                 lastName,
+                avatar,
                 ...(password && { password })
             };
             const response = await axios.put(`http://localhost:3000/users/${user._id}`, updatedUser);
@@ -42,9 +52,14 @@ const EditProfile = () => {
         }
     };
 
+    const handleAvatarClick = (selectedAvatar) => {
+        setAvatar(selectedAvatar);
+    };
+
     return (
         <div className="maincontainer1">
             <div className="edit-profile-container">
+                <button className="close-button" onClick={onClose}>×</button>
                 <h2 className="edit-profile-title">Edit Profile</h2>
                 <form className="edit-profile-form" onSubmit={handleSubmit}>
                     <div className="mb-4">
@@ -89,6 +104,17 @@ const EditProfile = () => {
                             onChange={(e) => setConfirmPassword(e.target.value)}
                         />
                         {error && <div className="error-message">{error}</div>}
+                    </div>
+                    <div className="avatar-selection">
+                        {avatars.map((avatarUrl, index) => (
+                            <img
+                                key={index}
+                                src={avatarUrl}
+                                alt={`avatar-${index + 1}`}
+                                className={avatar === avatarUrl ? 'selected' : ''}
+                                onClick={() => handleAvatarClick(avatarUrl)}
+                            />
+                        ))}
                     </div>
                     <button type="submit" className="edit-profile-button">Update Profile</button>
                 </form>
