@@ -38,17 +38,27 @@ const ContentsClass = () => {
       try {
         const res = await axios.get(`http://localhost:3000/courses/${courseId}`, { withCredentials: true });
         setFriends(res.data.course.subscription);
+        setImages(res.data.course.contents);
+        console.log('files:', res.data.course.contents)
          console.log('Friends:',friends);
         setTeacher(res.data.course.userId === theUserId);
   
-        const filesRes = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
-        setImages(filesRes.data.files);
-        console.log(1111, res.data.course);
-        console.log(1111, filesRes.data.files);
+      //   const filesRes = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
+
+      //   // setImages(filesRes.data.files);
+      
+      //   console.log(1111, filesRes.data.files[0].file);
+      // } catch (error) {
+      //   console.log(error);
+      // }
+      
+      
       } catch (error) {
-        console.log(error);
+        console.error('Error fetching data:', error);
       }
-    };
+    }
+
+
     fetchData();
   }, [courseId]);
   
