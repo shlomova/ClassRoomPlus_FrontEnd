@@ -10,9 +10,9 @@ import Home from './pages/home/Home.jsx';
 import Verifi from './pages/approve/Verifi.jsx';
 import Signup from './pages/signup/Signup.jsx';
 import About from './Components/header/AboutSection.jsx';
-import EditProfile from './Components/edituser/EditProfile.jsx'
+// import EditProfile from './pages/profile/EditProfile.jsx'
 import Profile from './pages/profile/Profile.jsx'; // Adjust the import path as needed
-import ChangePassword from './pages/profile/ChangePassword.jsx'; // Adjust the import path as needed
+// import ChangePassword from './pages/profile/ChangePassword.jsx'; // Adjust the import path as needed
 
 const router = createBrowserRouter([
     {
@@ -51,14 +51,14 @@ const router = createBrowserRouter([
         path: 'profile',
         element: <Profile />
     },
-    {
-        path: 'edit-profile',
-        element: <EditProfile />
-    },
-    {
-        path: 'change-password',
-        element: <ChangePassword />
-    },
+    // {
+    //     path: 'edit-profile',
+    //     element: <EditProfile />
+    // },
+    // {
+    //     path: 'change-password',
+    //     element: <ChangePassword />
+    // },
     {
         path: '*',
         element: <Navigate to="/" replace />

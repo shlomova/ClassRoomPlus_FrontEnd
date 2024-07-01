@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import './Header.css';
-import EditProfile from '../edituser/EditProfile';
 
 const Header = ({ showLinks, showPartLinks }) => {
     const [user, setUser] = useState({});
@@ -31,20 +30,21 @@ const Header = ({ showLinks, showPartLinks }) => {
     const handleSelectChange = (e) => {
         if (e.target.value === 'logout') {
             handleLogout();
-        } else if (e.target.value === '/edit-profile') {
-            handleEditProfileOpen();
+        // } else if (e.target.value === '/edit-profile') {
+        //     handleEditProfileOpen();
         } else {
             window.location.href = e.target.value;
         }
     };
 
-    const handleEditProfileOpen = () => {
-        setIsEditProfileOpen(true);
-    };
+    // const handleEditProfileOpen = () => {
+    //     console.log('Edit Profile Open');
+    //     setIsEditProfileOpen(true);
+    // };
 
-    const handleEditProfileClose = () => {
-        setIsEditProfileOpen(false);
-    };
+    // const handleEditProfileClose = () => {
+    //     setIsEditProfileOpen(false);
+    // };
 
     const toggleMenu = () => {
         setMenuOpen(!menuOpen);
@@ -94,7 +94,7 @@ const Header = ({ showLinks, showPartLinks }) => {
                             </li>
                             <li className="nav-item dropdown">
                                 <select className="nav-link bg-dark text-white px-3" defaultValue="#" onChange={handleSelectChange}>
-                                    <option value="#" disabled>Account</option>
+                                    <option value="" disabled>Account</option>
                                     <option value="/profile">View Profile</option>
                                     <option value="/edit-profile">Edit Profile</option>
                                     <option value="/change-password">Change Password</option>
@@ -130,7 +130,7 @@ const Header = ({ showLinks, showPartLinks }) => {
                     )}
                 </ul>
             </nav>
-            {isEditProfileOpen && <EditProfile onClose={handleEditProfileClose} />}
+            {/* {isEditProfileOpen && <EditProfile onClose={handleEditProfileClose} />} */}
         </header>
     );
 };

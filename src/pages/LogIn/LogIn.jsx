@@ -55,7 +55,7 @@ const Login = () => {
         localStorage.removeItem('userInfo');
         window.location.href = '/login';
     };
-   
+
   return (
     <>
     {/*the heater should be with no links  */}
