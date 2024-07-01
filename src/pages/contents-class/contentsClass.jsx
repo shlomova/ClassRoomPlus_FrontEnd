@@ -1,34 +1,40 @@
-import React, { useEffect, useState, useRef } from 'react';
-import './contentsClass.css';
-import axios from 'axios';
-import { useLocation } from 'react-router-dom';
-import ContentsClassPeople from '../../Components/contents-class-people/ContentsClassPeople';
-import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken';
-import Chatroom from '../../Components/chatroom/chatroom.jsx';
-import AddFile from '../../Components/addFile/AddFile';
-import GetFiles from '../../Components/getFiles/getFiles';
-import Chatbot from '../../Components/chatbot/chatbot';
-import Header from '../../Components/header/Header';
+import React, { useEffect, useId } from 'react'
+import './contentsClass.css'
+import axios from 'axios'
+import { useState } from 'react'
+import { useRef } from 'react'
+import { json, useLocation } from 'react-router-dom'
+import ContentsClassPeople from '../../Components/contents-class-people/ContentsClassPeople'
+import UtilsCheckUserAndToken from '../../utils/utilsCheckUserAndToken'
+import Chatroom from '../../Components/chatroom/chatroom.jsx'
+import AddFile from '../../Components/addFile/AddFile'
+import GetFiles from '../../Components/getFiles/getFiles'
+import Chatbot from '../../Components/chatbot/chatbot'
+
+
+import Header from '../../Components/header/Header'
+
 
 const ContentsClass = () => {
-  const checkUserAndToken = UtilsCheckUserAndToken();
-  const [friends, setFriends] = useState([]);
-  const [courses, setCourses] = useState(true);
-  const [people, setPeople] = useState(null);
-  const [chats, setChats] = useState(null);
-  const [openPostFile, setOpenPostFile] = useState(false);
-  const location = useLocation();
-  const [teacher, setTeacher] = useState(false);
-  const { openDate, endDate, courseId, courseName, description, price, subscription, userId } = location.state || {};
-  const userInfo = JSON.parse(localStorage.getItem('userInfo'));
-  const avatar = JSON.parse(localStorage.getItem('avatar'));
-  const name = userInfo?.data?.user?.firstName;
-  const theUserId = userInfo?.data?.user?._id;
 
+  const checkUserAndToken = UtilsCheckUserAndToken()
+  const [friends, setFriends] = useState([])
+  const [courses, setCourses] = useState(true)
+  const [people, setPeople] = useState(null)
+  const [chats, setChats] = useState(null)
+  const [openPostFile, setOpenPostFile] = useState(null)
+  const location = useLocation()
+  const [teacher, setTeacher] = useState(false)
   const [images, setImages] = useState([]);
-  const [isOpen, setIsOpen] = useState(false);
-  const [position, setPosition] = useState({});
-  const targetRef = useRef(null);
+  const { courseId, openDate, endDate, courseName, description, price, userId, subscription } = location.state || {};
+
+  const userInfo = localStorage.getItem('userInfo');
+  const avatar = JSON.parse(localStorage.getItem('avatar'));
+  const name = JSON.parse(userInfo).data.user.firstName
+  const { data } = JSON.parse(userInfo)
+  const theUserId = data.user._id
+
+  const isTeacher = (userId === theUserId) ? [{ role: 'teacher' }] : []
 
   useEffect(() => {
     checkUserAndToken();
@@ -37,44 +43,37 @@ const ContentsClass = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
-        console.log(res.data);
-        const files = res.data.files;
-        setImages(files);
+        const res = await axios.get(`http://localhost:3000/courses/${courseId}`, { withCredentials: true });
+
+        setFriends(res.data.course.subscriptions);
       } catch (error) {
         console.log(error);
       }
-    };
-    fetchData();
-  }, [courseId]);
+    }
+    fetchfriends()
+  }, [courseId])
+
+
 
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchFiles = async () => {
       try {
-        const res = await axios.get(`http://localhost:3000/courses/${courseId}`, { withCredentials: true });
-        setFriends(res.data.course.subscriptions);
-        setTeacher(res.data.course.userId === theUserId);
-        // setImages (res.data.course.contents)
-        console.log(res.data.course.contents);
+        const res = await axios.get(`http://localhost:3000/files/course/${courseId}`, { withCredentials: true });
+        // const files = res.data.files.map(item => ({ ...item, file: `http://localhost:3000/${item.file}` }))
+        console.log(res.data.files);
+        setImages(res.data.files);
+
       } catch (error) {
         console.log(error);
+        console.error('Error fetching data:', error);
       }
-    };
+    }
+
+
     fetchData();
   }, [courseId]);
-
-
-
-  const togglePopup = () => {
-    if (targetRef.current) {
-      const { top, left } = targetRef.current.getBoundingClientRect();
-      const popupTopPosition = top + window.scrollY - 30;
-      setPosition({ top: popupTopPosition, left: left + window.scrollX });
-      setIsOpen(!isOpen);
-    }
-  };
-
+  
   const handlePeople = () => {
     setPeople(true);
     setCourses(false);
@@ -100,6 +99,7 @@ const ContentsClass = () => {
     setOpenPostFile(true);
   };
 
+ console.log(images);
   const handleFileUpload = (newFile) => {
     setImages([...images, newFile]);
     setOpenPostFile(false);
@@ -133,7 +133,7 @@ const ContentsClass = () => {
               </li>
               <li>{openDate}</li>
               <li>{endDate}</li>
-              <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li>
+              {/* <li ref={targetRef} onMouseEnter={togglePopup} onMouseLeave={togglePopup} className='text-decoration-underline' id='De'>{description}</li> */}
               <li>{price}</li>
               {teacher && (
                 <button id='PostFile' onClick={handleButtonPostFile}>Post file</button>
@@ -146,12 +146,27 @@ const ContentsClass = () => {
               </div>
             )}
           </div>
-           for 
+        <>
+          <div id='theUl1'>
+            <ul id='ul'>
+              <li id='theLi'>
+                <h2>{courseName}</h2>
+              </li>
+              <li>{openDate}</li>
+              <li>{endDate}</li>
+              <li className='text-decoration-underline' id='De'>{description}</li>
+              <li>{price}</li>
+              {teacher && (
+                <button id='PostFile' onClick={handleButtonPostFile}>Post file</button>
+              )}
+            </ul>
+          </div>
           <GetFiles images={images} teacher={teacher} />
+        </>
         </>
       )}
       {people && (
-        <ContentsClassPeople courseId={courseId} />
+        <ContentsClassPeople friends={friends} />
       )}
       {chats && (
         <div>
@@ -160,7 +175,7 @@ const ContentsClass = () => {
       )}
       {openPostFile && (
         <div>
-          <AddFile courseId={courseId} onFileUpload={handleFileUpload} />
+          <AddFile courseId={courseId} onFileUpload={handleFileUpload}  />
         </div>
       )}
     </>
